@@ -1,6 +1,6 @@
 # 🌐 Personal Portfolio Website
 
-🔗 **Live Website:** https://sjm2006.github.io/
+🔗 **Live Website:** https://sjm2006.github.io/portfolio/
 
 ---
 
