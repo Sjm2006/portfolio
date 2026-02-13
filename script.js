@@ -1,34 +1,59 @@
 // script.js
 
-// Create orbit rings around photo
+// Get container size dynamically
+function getContainerSize() {
+  const photoContainer = document.getElementById('photoContainer');
+  if (!photoContainer) return 420;
+  return Math.min(photoContainer.offsetWidth, 420);
+}
+
+// Create orbit rings around photo - mobile responsive
 function createOrbitRings() {
   const photoContainer = document.getElementById('photoContainer');
-  const sizes = [420, 360, 300];
+  if (!photoContainer) return;
+  
+  const containerSize = getContainerSize();
+  const sizes = [
+    containerSize,
+    containerSize * 0.857, // 360/420
+    containerSize * 0.714  // 300/420
+  ];
+  
   for (let i = 0; i < 3; i++) {
     const ring = document.createElement('div');
     ring.className = 'orbit-ring';
     ring.style.width = `${sizes[i]}px`;
     ring.style.height = `${sizes[i]}px`;
-    ring.style.left = `${(420 - sizes[i]) / 2}px`;
-    ring.style.top = `${(420 - sizes[i]) / 2}px`;
+    ring.style.left = `${(containerSize - sizes[i]) / 2}px`;
+    ring.style.top = `${(containerSize - sizes[i]) / 2}px`;
     ring.style.animationDelay = `-${i * 2}s`;
     photoContainer.appendChild(ring);
   }
 }
 
-// Create moving particles around photo
+// Create moving particles around photo - mobile responsive
 function createMovingParticles() {
   const photoContainer = document.getElementById('photoContainer');
-  const particleCount = 12;
+  if (!photoContainer) return;
+  
+  const containerSize = getContainerSize();
+  const center = containerSize / 2;
+  
+  // Reduce particle count on smaller screens
+  const particleCount = window.innerWidth < 768 ? 8 : 12;
+  
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'moving-particle';
     const angle = (i / particleCount) * Math.PI * 2;
-    const distance = 220 + Math.random() * 80;
-    const startX = 210 + Math.cos(angle) * 150;
-    const startY = 210 + Math.sin(angle) * 150;
-    const endX = 210 + Math.cos(angle + Math.PI) * distance;
-    const endY = 210 + Math.sin(angle + Math.PI) * distance;
+    const distance = (containerSize * 0.52) + Math.random() * (containerSize * 0.19);
+    const startRadius = containerSize * 0.36;
+    
+    const startX = center + Math.cos(angle) * startRadius;
+    const startY = center + Math.sin(angle) * startRadius;
+    const endX = center + Math.cos(angle + Math.PI) * distance;
+    const endY = center + Math.sin(angle + Math.PI) * distance;
+    
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
     particle.style.setProperty('--tx', `${endX - startX}px`);
@@ -39,10 +64,14 @@ function createMovingParticles() {
   }
 }
 
-// Create circuit lines
+// Create circuit lines - reduce on mobile
 function createCircuitLines() {
   const circuitContainer = document.getElementById('circuitLines');
-  const lineCount = 15;
+  if (!circuitContainer) return;
+  
+  // Reduce line count on mobile for better performance
+  const lineCount = window.innerWidth < 768 ? 8 : 15;
+  
   for (let i = 0; i < lineCount; i++) {
     const line = document.createElement('div');
     line.className = 'circuit-line';
@@ -62,14 +91,52 @@ function createCircuitLines() {
   }
 }
 
+// Clear and recreate animations on resize
+function reinitializeAnimations() {
+  const photoContainer = document.getElementById('photoContainer');
+  if (!photoContainer) return;
+  
+  // Remove existing orbit rings and particles
+  const existingRings = photoContainer.querySelectorAll('.orbit-ring, .moving-particle');
+  existingRings.forEach(el => el.remove());
+  
+  // Recreate with new sizes
+  createOrbitRings();
+  createMovingParticles();
+}
+
+// Debounce function to limit resize event calls
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Handle window resize for responsive animations
+const debouncedResize = debounce(() => {
+  reinitializeAnimations();
+}, 250);
+
+window.addEventListener('resize', debouncedResize);
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
       window.scrollTo({
-        top: target.offsetTop - 80,
+        top: offsetPosition,
         behavior: 'smooth'
       });
     }
@@ -93,4 +160,9 @@ window.addEventListener('load', function() {
   createOrbitRings();
   createMovingParticles();
   createCircuitLines();
+});
+
+// Handle orientation change on mobile devices
+window.addEventListener('orientationchange', function() {
+  setTimeout(reinitializeAnimations, 200);
 });
