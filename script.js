@@ -145,14 +145,39 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Initialize EmailJS with your Public Key
 (function() {
-  emailjs.init("BW-BZcyECGiOQe0zP");
+  try {
+    emailjs.init("BW-BZcyECGiOQe0zP");
+    console.log('EmailJS initialized successfully');
+  } catch (error) {
+    console.error('EmailJS initialization failed:', error);
+  }
 })();
 
-// Form submission handling with EmailJS
+// Form submission handling with EmailJS - Mobile Optimized + Auto Reply
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('Form submitted');
+    
+    // Get form values directly
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+    
+    console.log('Form data:', { name, email, message });
+    
+    // Validate inputs
+    if (!name || !email || !message) {
+      alert('Please fill in all fields');
+      return;
+    }
     
     // Show loading state
     const submitBtn = this.querySelector('button[type="submit"]');
@@ -160,17 +185,39 @@ if (contactForm) {
     submitBtn.textContent = 'SENDING...';
     submitBtn.disabled = true;
     
-    // Send email using EmailJS
-    emailjs.sendForm('service_il351vr', 'template_t9o5rdq', this)
-      .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        alert('Thank you! Your message has been sent successfully. I\'ll get back to you within 24 hours.');
-        contactForm.reset();
+    // Prepare template parameters
+    const templateParams = {
+      from_name: name,
+      reply_to: email,
+      message: message,
+      to_name: 'Soumyajeet'
+    };
+    
+    console.log('Sending emails...');
+    
+    // Send email to YOU (notification)
+    const sendToMe = emailjs.send('service_il351vr', 'template_t9o5rdq', templateParams);
+    
+    // Send auto-reply to SENDER
+    const sendToSender = emailjs.send('service_il351vr', 'template_oyp16d8', templateParams);
+    
+    // Wait for both emails to send
+    Promise.all([sendToMe, sendToSender])
+      .then(function(responses) {
+        console.log('Both emails sent successfully!', responses);
+        alert('Thank you, ' + name + '! Your message has been sent successfully. You\'ll receive a confirmation email shortly. I\'ll get back to you within 24 hours.');
+        
+        // Reset form
+        nameInput.value = '';
+        emailInput.value = '';
+        messageInput.value = '';
+        
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-      }, function(error) {
-        console.log('FAILED...', error);
-        alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com');
+      })
+      .catch(function(error) {
+        console.error('Failed to send emails:', error);
+        alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: ' + (error.text || error.message || 'Unknown error'));
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       });
