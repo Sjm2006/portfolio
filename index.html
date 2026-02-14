@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" href="images/Self_round_frame.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
   <!-- Cyberpunk background elements -->
@@ -41,7 +43,7 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-text">
-          <h1>Hi, I’m Soumyajeet. <span></span></h1>
+          <h1>Hi, I'm Soumyajeet. <span></span></h1>
           <div class="subtitle">I develop intuitive web systems with practical impact.</div>
           <p>From logic to interface, I build web applications that think, respond, and solve real problems — blending modern development with intelligent systems.</p>
           <div class="hero-buttons">
@@ -80,13 +82,13 @@
       <div class="about-content">
         <div class="about-card">
           <h3><i class="fas fa-user"></i> ABOUT ME</h3>
-         <p>I’m a BCA student based in Kolkata, pursuing my degree at Techno India, Salt Lake. I enjoy building responsive, user-focused web applications and working at the intersection of logic, design, and technology.</p>
+         <p>I'm a BCA student based in Kolkata, pursuing my degree at Techno India, Salt Lake. I enjoy building responsive, user-focused web applications and working at the intersection of logic, design, and technology.</p>
 
-         <p>I’m driven by curiosity and problem-solving, with a focus on modern web development, clean code practices, and exploring practical applications of AI. Through academic work, personal projects, and continuous self-learning, I aim to grow as a full-stack developer and build solutions that are both functional and meaningful.</p>
+         <p>I'm driven by curiosity and problem-solving, with a focus on modern web development, clean code practices, and exploring practical applications of AI. Through academic work, personal projects, and continuous self-learning, I aim to grow as a full-stack developer and build solutions that are both functional and meaningful.</p>
         </div>
         <div class="about-card">
           <h3><i class="fas fa-bolt"></i> WHAT DRIVES ME</h3>
-          <p>I’m driven by a constant curiosity to understand how things work and a desire to solve meaningful problems. I’m motivated by understanding how things work, building practical solutions, and continuously improving through hands-on projects. I enjoy experimenting with new technologies, refining my skills, and turning ideas into reliable, user-focused web applications.</p>
+          <p>I'm driven by a constant curiosity to understand how things work and a desire to solve meaningful problems. I'm motivated by understanding how things work, building practical solutions, and continuously improving through hands-on projects. I enjoy experimenting with new technologies, refining my skills, and turning ideas into reliable, user-focused web applications.</p>
 <p>I have a strong interest in data structures and algorithms, system logic, and applied AI. I enjoy analyzing problems, designing efficient approaches, and understanding how different components of a system work together. Exploring these areas helps me build applications that are not only functional, but also optimized and thoughtfully designed.</p>
           
         </div>
@@ -202,7 +204,7 @@
           </div>
         </div>
       </div>
-    
+    </div>
   </section>
 
   <!-- Projects Section -->
@@ -329,15 +331,15 @@
           <form id="contactForm">
             <div class="form-group">
               <label for="name">FULL NAME</label>
-              <input type="text" id="name" placeholder="Enter your full name" required />
+              <input type="text" id="name" name="from_name" placeholder="Enter your full name" required />
             </div>
             <div class="form-group">
               <label for="email">EMAIL ADDRESS</label>
-              <input type="email" id="email" placeholder="Enter your email address" required />
+              <input type="email" id="email" name="reply_to" placeholder="Enter your email address" required />
             </div>
             <div class="form-group">
               <label for="message">PROJECT BRIEF</label>
-              <textarea id="message" placeholder="Describe your project or collaboration idea..." required></textarea>
+              <textarea id="message" name="message" placeholder="Describe your project or collaboration idea..." required></textarea>
             </div>
             <button type="submit" class="btn">SEND MESSAGE</button>
           </form>

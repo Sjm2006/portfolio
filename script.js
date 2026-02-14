@@ -143,15 +143,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Form submission handling
+// Initialize EmailJS with your Public Key
+(function() {
+  emailjs.init("BW-BZcyECGiOQe0zP");
+})();
+
+// Form submission handling with EmailJS
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const formData = new FormData(this);
-    const name = formData.get('name');
-    alert(`Thank you, ${name}! Your message has been sent successfully. I'll get back to you within 24 hours.`);
-    contactForm.reset();
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'SENDING...';
+    submitBtn.disabled = true;
+    
+    // Send email using EmailJS
+    emailjs.sendForm('service_il351vr', 'template_t9o5rdq', this)
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        alert('Thank you! Your message has been sent successfully. I\'ll get back to you within 24 hours.');
+        contactForm.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, function(error) {
+        console.log('FAILED...', error);
+        alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
   });
 }
 
