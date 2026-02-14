@@ -147,9 +147,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 (function() {
   try {
     emailjs.init("BW-BZcyECGiOQe0zP");
-    console.log('EmailJS initialized successfully');
+    console.log('✅ EmailJS initialized successfully');
   } catch (error) {
-    console.error('EmailJS initialization failed:', error);
+    console.error('❌ EmailJS initialization failed:', error);
   }
 })();
 
@@ -160,7 +160,7 @@ if (contactForm) {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('Form submitted');
+    console.log('📝 Form submitted');
     
     // Get form values directly
     const nameInput = document.getElementById('name');
@@ -171,7 +171,7 @@ if (contactForm) {
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
     
-    console.log('Form data:', { name, email, message });
+    console.log('📋 Form data:', { name, email, message });
     
     // Validate inputs
     if (!name || !email || !message) {
@@ -193,18 +193,36 @@ if (contactForm) {
       to_name: 'Soumyajeet'
     };
     
-    console.log('Sending emails...');
+    console.log('📧 Sending emails with params:', templateParams);
     
     // Send email to YOU (notification)
-    const sendToMe = emailjs.send('service_il351vr', 'template_t9o5rdq', templateParams);
+    console.log('📤 Sending notification email to you...');
+    const sendToMe = emailjs.send('service_il351vr', 'template_t9o5rdq', templateParams)
+      .then(response => {
+        console.log('✅ Notification email sent successfully!', response);
+        return response;
+      })
+      .catch(error => {
+        console.error('❌ Notification email failed:', error);
+        throw error;
+      });
     
     // Send auto-reply to SENDER
-    const sendToSender = emailjs.send('service_il351vr', 'template_oyp16d8', templateParams);
+    console.log('📤 Sending auto-reply email to sender...');
+    const sendToSender = emailjs.send('service_il351vr', 'template_oyp16d8', templateParams)
+      .then(response => {
+        console.log('✅ Auto-reply email sent successfully!', response);
+        return response;
+      })
+      .catch(error => {
+        console.error('❌ Auto-reply email failed:', error);
+        throw error;
+      });
     
     // Wait for both emails to send
     Promise.all([sendToMe, sendToSender])
       .then(function(responses) {
-        console.log('Both emails sent successfully!', responses);
+        console.log('🎉 Both emails sent successfully!', responses);
         alert('Thank you, ' + name + '! Your message has been sent successfully. You\'ll receive a confirmation email shortly. I\'ll get back to you within 24 hours.');
         
         // Reset form
@@ -216,8 +234,22 @@ if (contactForm) {
         submitBtn.disabled = false;
       })
       .catch(function(error) {
-        console.error('Failed to send emails:', error);
-        alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: ' + (error.text || error.message || 'Unknown error'));
+        console.error('💥 Failed to send emails:', error);
+        console.error('Error details:', {
+          text: error.text,
+          status: error.status,
+          message: error.message
+        });
+        
+        // Check which email failed
+        if (error.text && error.text.includes('template_t9o5rdq')) {
+          alert('Failed to send notification email. Please try again.');
+        } else if (error.text && error.text.includes('template_oyp16d8')) {
+          alert('Your message was sent, but the auto-reply failed. I\'ll still respond within 24 hours!');
+        } else {
+          alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: ' + (error.text || error.message || 'Unknown error'));
+        }
+        
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       });
