@@ -139,6 +139,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+      
+      // Track navigation click in Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'navigation_click', {
+          'event_category': 'Navigation',
+          'event_label': this.getAttribute('href'),
+          'value': 1
+        });
+      }
     }
   });
 });
@@ -223,6 +232,16 @@ if (contactForm) {
     Promise.all([sendToMe, sendToSender])
       .then(function(responses) {
         console.log('🎉 Both emails sent successfully!', responses);
+        
+        // Track successful form submission in Google Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission', {
+            'event_category': 'Contact',
+            'event_label': 'Contact Form Submitted',
+            'value': 1
+          });
+        }
+        
         alert('Thank you, ' + name + '! Your message has been sent successfully. You\'ll receive a confirmation email shortly. I\'ll get back to you within 24 hours.');
         
         // Reset form
@@ -241,6 +260,15 @@ if (contactForm) {
           message: error.message
         });
         
+        // Track form error in Google Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_error', {
+            'event_category': 'Contact',
+            'event_label': 'Contact Form Error',
+            'value': 0
+          });
+        }
+        
         // Check which email failed
         if (error.text && error.text.includes('template_t9o5rdq')) {
           alert('Failed to send notification email. Please try again.');
@@ -256,11 +284,120 @@ if (contactForm) {
   });
 }
 
+// Track CV download button clicks
+const cvButton = document.querySelector('a[href*="CV.pdf"]');
+if (cvButton) {
+  cvButton.addEventListener('click', function() {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'cv_download', {
+        'event_category': 'Downloads',
+        'event_label': 'CV Download',
+        'value': 1
+      });
+    }
+  });
+}
+
+// Track project link clicks
+document.querySelectorAll('.project-card a[href*="github.io"]').forEach(link => {
+  link.addEventListener('click', function() {
+    if (typeof gtag !== 'undefined') {
+      const projectName = this.closest('.project-card').querySelector('h3').textContent;
+      gtag('event', 'project_view', {
+        'event_category': 'Projects',
+        'event_label': projectName,
+        'value': 1
+      });
+    }
+  });
+});
+
+// Track social media link clicks
+document.querySelectorAll('.social-link, .social-link-hero').forEach(link => {
+  link.addEventListener('click', function() {
+    if (typeof gtag !== 'undefined') {
+      const platform = this.href.includes('github') ? 'GitHub' :
+                      this.href.includes('linkedin') ? 'LinkedIn' :
+                      this.href.includes('facebook') ? 'Facebook' :
+                      this.href.includes('instagram') ? 'Instagram' : 'Unknown';
+      
+      gtag('event', 'social_click', {
+        'event_category': 'Social Media',
+        'event_label': platform,
+        'value': 1
+      });
+    }
+  });
+});
+
+// Track scroll depth (25%, 50%, 75%, 100%)
+let scrollTracked = {
+  '25': false,
+  '50': false,
+  '75': false,
+  '100': false
+};
+
+window.addEventListener('scroll', debounce(function() {
+  const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+  
+  if (scrollPercent >= 25 && !scrollTracked['25']) {
+    scrollTracked['25'] = true;
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'scroll_depth', {
+        'event_category': 'Engagement',
+        'event_label': '25% Scroll',
+        'value': 25
+      });
+    }
+  }
+  if (scrollPercent >= 50 && !scrollTracked['50']) {
+    scrollTracked['50'] = true;
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'scroll_depth', {
+        'event_category': 'Engagement',
+        'event_label': '50% Scroll',
+        'value': 50
+      });
+    }
+  }
+  if (scrollPercent >= 75 && !scrollTracked['75']) {
+    scrollTracked['75'] = true;
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'scroll_depth', {
+        'event_category': 'Engagement',
+        'event_label': '75% Scroll',
+        'value': 75
+      });
+    }
+  }
+  if (scrollPercent >= 95 && !scrollTracked['100']) {
+    scrollTracked['100'] = true;
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'scroll_depth', {
+        'event_category': 'Engagement',
+        'event_label': '100% Scroll',
+        'value': 100
+      });
+    }
+  }
+}, 500));
+
 // Initialize all animations on load
 window.addEventListener('load', function() {
   createOrbitRings();
   createMovingParticles();
   createCircuitLines();
+  
+  // Track page load time
+  if (typeof gtag !== 'undefined' && window.performance) {
+    const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+    gtag('event', 'page_load_time', {
+      'event_category': 'Performance',
+      'event_label': 'Load Time (ms)',
+      'value': loadTime
+    });
+  }
 });
 
 // Handle orientation change on mobile devices
