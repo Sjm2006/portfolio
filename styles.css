@@ -558,13 +558,6 @@ section::before {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.tech-item i {
-  font-size: 1.1rem;
-  opacity: 0.9;
 }
 .tech-item::before {
   content: '';
@@ -601,8 +594,10 @@ section::before {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .project-card {
@@ -641,7 +636,7 @@ section::before {
 }
 
 .project-img {
-  height: 240px;
+  height: 200px;
   overflow: hidden;
   border-bottom: 3px solid var(--border-color);
   position: relative;
@@ -677,15 +672,15 @@ section::before {
 }
 
 .project-info {
-  padding: 40px;
+  padding: 25px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .project-info h3 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
   color: var(--accent-light);
   font-weight: 800;
   background: linear-gradient(45deg, var(--accent-light), var(--accent));
@@ -695,25 +690,25 @@ section::before {
 
 .project-info p {
   color: var(--text-secondary);
-  margin-bottom: 30px;
-  line-height: 1.8;
+  margin-bottom: 20px;
+  line-height: 1.6;
   flex: 1;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .tag {
   background: rgba(108, 92, 231, 0.2);
   color: var(--accent-light);
-  padding: 10px 22px;
-  border-radius: 25px;
-  font-size: 0.95rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid rgba(108, 92, 231, 0.3);
   transition: all 0.3s ease;
@@ -978,6 +973,13 @@ footer {
   .subtitle { font-size: 1.6rem; }
   .hero-buttons { flex-direction: column; align-items: center; }
 }
+@media (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links { display: none; }
   h1 { font-size: 3rem; }
