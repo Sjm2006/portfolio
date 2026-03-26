@@ -1,517 +1,875 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
-  
-  <!-- SEO Meta Tags -->
-  <title>Soumyajeet Mondal - Full-Stack Web Developer | Portfolio</title>
-  <meta name="description" content="Soumyajeet Mondal - Full-Stack Developer specializing in web development, Python, JavaScript, React, and AI integration. BCA student at Techno India, Kolkata. View portfolio, projects, and contact information.">
-  <meta name="keywords" content="Soumyajeet Mondal, Full-Stack Developer, Web Developer, Python Developer, JavaScript Developer, React Developer, Portfolio, Kolkata Developer, BCA Student, Techno India, Web Development, AI Integration, Frontend Developer, Backend Developer">
-  <meta name="author" content="Soumyajeet Mondal">
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
-  <link rel="canonical" href="https://sjm2006.github.io/portfolio/">
-  
-  <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
-  <meta property="og:title" content="Soumyajeet Mondal | Full-Stack Developer Portfolio">
-  <meta property="og:description" content="Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration. Explore my projects and get in touch.">
-  <meta property="og:url" content="https://sjm2006.github.io/portfolio/">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://sjm2006.github.io/portfolio/images/self.png">
-  <meta property="og:site_name" content="Soumyajeet Mondal Portfolio">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Soumyajeet Mondal | Full-Stack Developer">
-  <meta name="twitter:description" content="Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration.">
-  <meta name="twitter:image" content="https://sjm2006.github.io/portfolio/images/self.png">
-  <meta name="twitter:creator" content="@sjm2006">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#6c5ce7">
-  <meta name="msapplication-TileColor" content="#6c5ce7">
-  <meta name="geo.region" content="IN-WB">
-  <meta name="geo.placename" content="Kolkata">
-  <meta name="geo.position" content="22.5726;88.3639">
-  <meta name="ICBM" content="22.5726, 88.3639">
-  
-  <link rel="icon" type="image/png" href="images/Self_round_frame.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="styles.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NX5YX77J88"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NX5YX77J88');
-  </script>
-  <!-- End Google Analytics -->
-  
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  
-  <!-- Structured Data (Schema.org) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Soumyajeet Mondal",
-    "url": "https://sjm2006.github.io/portfolio/",
-    "image": "https://sjm2006.github.io/portfolio/images/self.png",
-    "jobTitle": "Full-Stack Developer",
-    "description": "Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration",
-    "email": "soumyajeet2006mondal@gmail.com",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance"
-    },
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "Techno India, Salt Lake",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Kolkata",
-        "addressRegion": "West Bengal",
-        "addressCountry": "India"
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';"
+    />
+
+    <!-- SEO Meta Tags -->
+    <title>Soumyajeet Mondal - Full-Stack Web Developer | Portfolio</title>
+    <meta
+      name="description"
+      content="Soumyajeet Mondal - Full-Stack Developer specializing in web development, Python, JavaScript, React, and AI integration. BCA student at Techno India, Kolkata. View portfolio, projects, and contact information."
+    />
+    <meta
+      name="keywords"
+      content="Soumyajeet Mondal, Full-Stack Developer, Web Developer, Python Developer, JavaScript Developer, React Developer, Portfolio, Kolkata Developer, BCA Student, Techno India, Web Development, AI Integration, Frontend Developer, Backend Developer"
+    />
+    <meta name="author" content="Soumyajeet Mondal" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://sjm2006.github.io/portfolio/" />
+
+    <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
+    <meta
+      property="og:title"
+      content="Soumyajeet Mondal | Full-Stack Developer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration. Explore my projects and get in touch."
+    />
+    <meta property="og:url" content="https://sjm2006.github.io/portfolio/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://sjm2006.github.io/portfolio/images/self.png"
+    />
+    <meta property="og:site_name" content="Soumyajeet Mondal Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Soumyajeet Mondal | Full-Stack Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration."
+    />
+    <meta
+      name="twitter:image"
+      content="https://sjm2006.github.io/portfolio/images/self.png"
+    />
+    <meta name="twitter:creator" content="@sjm2006" />
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#6c5ce7" />
+    <meta name="msapplication-TileColor" content="#6c5ce7" />
+    <meta name="geo.region" content="IN-WB" />
+    <meta name="geo.placename" content="Kolkata" />
+    <meta name="geo.position" content="22.5726;88.3639" />
+    <meta name="ICBM" content="22.5726, 88.3639" />
+
+    <link rel="icon" type="image/png" href="images/Self_round_frame.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NX5YX77J88"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
       }
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kolkata",
-      "addressRegion": "West Bengal",
-      "addressCountry": "India"
-    },
-    "sameAs": [
-      "https://github.com/Sjm2006",
-      "https://www.linkedin.com/in/soumyajeet-mondal-84220a202",
-      "https://www.facebook.com/share/1aiANC8QG1/",
-      "https://www.instagram.com/sjm____18"
-    ],
-    "knowsAbout": [
-      "Web Development",
-      "Python",
-      "JavaScript",
-      "HTML5",
-      "CSS3",
-      "React",
-      "Full-Stack Development",
-      "AI Integration",
-      "REST APIs"
-    ]
-  }
-  </script>
-</head>
-<body>
-  <!-- Cyberpunk background elements -->
-  <div class="cyber-grid"></div>
-  <div class="circuit-lines" id="circuitLines"></div>
+      gtag("js", new Date());
+      gtag("config", "G-NX5YX77J88");
+    </script>
+    <!-- End Google Analytics -->
 
-  <!-- Moving circuit elements -->
-  <div class="moving-circuit circuit-node" style="top: 15%; left: 5%;"></div>
-  <div class="moving-circuit circuit-connector" style="top: 70%; left: 85%; animation-delay: -10s;"></div>
-  <div class="moving-circuit circuit-node" style="top: 45%; left: 75%; animation-delay: -15s;"></div>
+    <!-- EmailJS SDK -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
 
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="logo">SOUMYAJEET MONDAL<span></span></a>
-        <div class="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#journey">Journey</a>
-          <a href="#tech-stack">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Soumyajeet Mondal",
+        "url": "https://sjm2006.github.io/portfolio/",
+        "image": "https://sjm2006.github.io/portfolio/images/self.png",
+        "jobTitle": "Full-Stack Developer",
+        "description": "Full-Stack Developer specializing in web development, Python, JavaScript, and AI integration",
+        "email": "soumyajeet2006mondal@gmail.com",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Techno India, Salt Lake",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kolkata",
+            "addressRegion": "West Bengal",
+            "addressCountry": "India"
+          }
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kolkata",
+          "addressRegion": "West Bengal",
+          "addressCountry": "India"
+        },
+        "sameAs": [
+          "https://github.com/Sjm2006",
+          "https://www.linkedin.com/in/soumyajeet-mondal-84220a202",
+          "https://www.facebook.com/share/1aiANC8QG1/",
+          "https://www.instagram.com/sjm____18"
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Python",
+          "JavaScript",
+          "HTML5",
+          "CSS3",
+          "React",
+          "Full-Stack Development",
+          "AI Integration",
+          "REST APIs"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Skip link helps keyboard users jump directly to content -->
+    <a href="#home" class="skip-link">Skip to main content</a>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Hi, I'm Soumyajeet Mondal. <span></span></h1>
-          <div class="subtitle">I develop intuitive web systems with practical impact.</div>
-          <p>From logic to interface, I build web applications that think, respond, and solve real problems — blending modern development with intelligent systems.</p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn">VIEW PROJECTS</a>
-            <a href="assets/Soumyajeet_Mondal_CV.pdf" class="btn btn-outline" onclick="alert('CV downloaded successfully!')">
-              <i class="fas fa-download"></i> DOWNLOAD CV
-            </a>
+    <!-- Shows reading progress while scrolling -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Cyberpunk background elements -->
+    <div class="cyber-grid"></div>
+    <div class="circuit-lines" id="circuitLines"></div>
+
+    <!-- Moving circuit elements -->
+    <div class="moving-circuit circuit-node" style="top: 15%; left: 5%"></div>
+    <div
+      class="moving-circuit circuit-connector"
+      style="top: 70%; left: 85%; animation-delay: -10s"
+    ></div>
+    <div
+      class="moving-circuit circuit-node"
+      style="top: 45%; left: 75%; animation-delay: -15s"
+    ></div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav>
+          <a href="#" class="logo">SOUMYAJEET MONDAL<span></span></a>
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="primaryNav"
+          >
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+          <div class="nav-links" id="primaryNav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#journey">Journey</a>
+            <a href="#tech-stack">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
           </div>
-          <div class="social-links-hero">
-            <a href="https://github.com/Sjm2006" target="_blank" rel="noopener noreferrer" class="social-link-hero" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202" target="_blank" rel="noopener noreferrer" class="social-link-hero" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.facebook.com/share/1aiANC8QG1/" target="_blank" rel="noopener noreferrer" class="social-link-hero" aria-label="Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/sjm____18" target="_blank" rel="noopener noreferrer" class="social-link-hero" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="photo-container" id="photoContainer">
-            <div class="main-photo-frame">
-              <img src="./images/self.png" alt="Soumyajeet Mondal - Full-Stack Developer" class="main-photo">
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Hi, I'm Soumyajeet Mondal. <span></span></h1>
+            <div class="subtitle">
+              I develop intuitive web systems with practical impact.
             </div>
-            <div class="scan-line"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>WHO I AM</h2>
-        <p>Get to know the person behind the code</p>
-      </div>
-      <div class="about-content">
-        <div class="about-card">
-          <h3><i class="fas fa-user"></i> ABOUT ME</h3>
-         <p>I'm a developer from Kolkata, pursuing BCA at Techno India. I build web applications with Python, JavaScript, and React.</p>
-
-         <p>I learn by building. I solve problems by iterating. I master what challenges me.</p>
-        </div>
-        <div class="about-card">
-          <h3><i class="fas fa-bolt"></i> WHAT DRIVES ME</h3>
-          <p>I'm driven by curiosity and the challenge of solving problems that matter. I don't just want solutions—I want to understand why they work. Data structures, algorithms, AI integration—I explore these deeply because they help me build applications that are scalable, efficient, and purposeful. Impact over perfection.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Journey Section -->
-  <section id="journey" class="journey-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>JOURNEY & EDUCATION</h2>
-        <p>My educational and professional path in technology</p>
-      </div>
-      <div class="timeline">
-        <h4>EXPERIENCE & EDUCATION</h4>
-        <div class="timeline-items">
-          <div class="timeline-item">
-            <h5>Bachelor of Computer Applications (BCA)</h5>
-            <div>Techno India, Salt Lake, Kolkata</div>
-            <div class="date">2024 - Present</div>
-            <p>Pursuing BCA with a focus on programming fundamentals, data structures, and system-level concepts. Actively applying this knowledge through hands-on projects in Python, web development, automation, and applied AI.</p>
-          </div>
-          <div class="timeline-item">
-            <h5>Web Developer</h5>
-            <div class="date">2024 - Present</div>
-            <p>Building responsive and user-focused web applications using HTML, CSS, JavaScript, and Next.js. Worked on multiple academic and self-initiated projects, including calculator and weather applications using real-time APIs, and a Smart Community Health Early Warning System developed as part of a national-level hackathon. Focused on clean UI design, practical problem-solving, and applying modern web technologies to real-world use cases.</p>
-          </div>
-          <div class="timeline-item">
-            <h5>Higher Secondary Education (Computer Science)</h5>
-            <div>Rampurhat High School(H.S), Rampurhat, Birbhum</div>
-            <div> 
-
+            <p>
+              From logic to interface, I build web applications that think,
+              respond, and solve real problems — blending modern development
+              with intelligent systems.
+            </p>
+            <div class="hero-buttons">
+              <a href="#projects" class="btn">VIEW PROJECTS</a>
+              <a
+                href="assets/Soumyajeet_Mondal_CV.pdf"
+                class="btn btn-outline"
+                onclick="alert('CV downloaded successfully!')"
+              >
+                <i class="fas fa-download"></i> DOWNLOAD CV
+              </a>
             </div>
-            <div class="date">2022 - 2024</div>
-            <p>Completed Higher Secondary education under the WBCHSE, with a rigorous academic focus on Physics, Chemistry, Mathematics, and Computer Science.</p>
+            <div class="social-links-hero">
+              <a
+                href="https://github.com/Sjm2006"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link-hero"
+                aria-label="GitHub Profile"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link-hero"
+                aria-label="LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a
+                href="https://www.facebook.com/share/1aiANC8QG1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link-hero"
+                aria-label="Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/sjm____18"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link-hero"
+                aria-label="Instagram Profile"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
           </div>
-          <div class="timeline-item">
-            <h5>Secondary School Examination</h5>
-            <div>Tarapith Taratirthya Vidyamandir, Tarapith, Birbhum</div>
-            <div class="date">2022 </div>
-            <p>Completed Secondary education under the WBBSE, building a strong academic foundation and essential analytical skills.</p>
+          <div class="hero-image">
+            <div class="photo-container" id="photoContainer">
+              <div class="main-photo-frame">
+                <img
+                  src="./images/self.png"
+                  alt="Soumyajeet Mondal - Full-Stack Developer"
+                  class="main-photo"
+                  decoding="async"
+                />
+              </div>
+              <div class="scan-line"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>WHO I AM</h2>
+          <p>Get to know the person behind the code</p>
+        </div>
+        <div class="about-content">
+          <div class="about-card">
+            <h3><i class="fas fa-user"></i> ABOUT ME</h3>
+            <p>
+              I'm a developer from Kolkata, pursuing BCA at Techno India. I
+              build web applications with Python, JavaScript, and React.
+            </p>
+
+            <p>
+              I learn by building. I solve problems by iterating. I master what
+              challenges me.
+            </p>
+          </div>
+          <div class="about-card">
+            <h3><i class="fas fa-bolt"></i> WHAT DRIVES ME</h3>
+            <p>
+              I'm driven by curiosity and the challenge of solving problems that
+              matter. I don't just want solutions—I want to understand why they
+              work. Data structures, algorithms, AI integration—I explore these
+              deeply because they help me build applications that are scalable,
+              efficient, and purposeful. Impact over perfection.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="journey-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>JOURNEY & EDUCATION</h2>
+          <p>My educational and professional path in technology</p>
+        </div>
+        <div class="timeline">
+          <h4>EXPERIENCE & EDUCATION</h4>
+          <div class="timeline-items">
+            <div class="timeline-item">
+              <h5>Bachelor of Computer Applications (BCA)</h5>
+              <div>Techno India, Salt Lake, Kolkata</div>
+              <div class="date">2024 - Present</div>
+              <p>
+                Pursuing BCA with a focus on programming fundamentals, data
+                structures, and system-level concepts. Actively applying this
+                knowledge through hands-on projects in Python, web development,
+                automation, and applied AI.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <h5>Web Developer</h5>
+              <div class="date">2024 - Present</div>
+              <p>
+                Building responsive and user-focused web applications using
+                HTML, CSS, JavaScript, and Next.js. Worked on multiple academic
+                and self-initiated projects, including calculator and weather
+                applications using real-time APIs, and a Smart Community Health
+                Early Warning System developed as part of a national-level
+                hackathon. Focused on clean UI design, practical
+                problem-solving, and applying modern web technologies to
+                real-world use cases.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <h5>Higher Secondary Education (Computer Science)</h5>
+              <div>Rampurhat High School(H.S), Rampurhat, Birbhum</div>
+              <div></div>
+              <div class="date">2022 - 2024</div>
+              <p>
+                Completed Higher Secondary education under the WBCHSE, with a
+                rigorous academic focus on Physics, Chemistry, Mathematics, and
+                Computer Science.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <h5>Secondary School Examination</h5>
+              <div>Tarapith Taratirthya Vidyamandir, Tarapith, Birbhum</div>
+              <div class="date">2022</div>
+              <p>
+                Completed Secondary education under the WBBSE, building a strong
+                academic foundation and essential analytical skills.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Tech Stack Section -->
-  <section id="tech-stack" class="tech-stack-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>SKILLS & TECHNOLOGY </h2>
-        <p>Core tools and technologies I use to build modern applications</p>
-      </div>
-      <div class="tech-categories">
-        <div class="tech-category">
-          <h4><i class="fas fa-code"></i> Programming & Web</h4>
-          <div class="tech-items">
-         <div class="tech-item must-have"><i class="fab fa-python"></i> Python</div>
-            <div class="tech-item must-have"><i class="fas fa-copyright"></i> C</div>
-            <div class="tech-item must-have"><i class="fas fa-copyright"></i> C++</div>
-            <div class="tech-item must-have"><i class="fab fa-js"></i> JavaScript</div>
-            <div class="tech-item must-have"><i class="fab fa-html5"></i> HTML5</div>
-            <div class="tech-item must-have"><i class="fab fa-css3-alt"></i> CSS3</div>
-          </div>
+    <section id="tech-stack" class="tech-stack-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>SKILLS & TECHNOLOGY</h2>
+          <p>Core tools and technologies I use to build modern applications</p>
         </div>
-        <div class="tech-category">
+        <div class="tech-categories">
+          <div class="tech-category">
+            <h4><i class="fas fa-code"></i> Programming & Web</h4>
+            <div class="tech-items">
+              <div class="tech-item must-have">
+                <i class="fab fa-python"></i> Python
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-copyright"></i> C
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-copyright"></i> C++
+              </div>
+              <div class="tech-item must-have">
+                <i class="fab fa-js"></i> JavaScript
+              </div>
+              <div class="tech-item must-have">
+                <i class="fab fa-html5"></i> HTML5
+              </div>
+              <div class="tech-item must-have">
+                <i class="fab fa-css3-alt"></i> CSS3
+              </div>
+            </div>
+          </div>
+          <div class="tech-category">
             <h4><i class="fas fa-brain"></i> Core Concepts</h4>
-                    <div class="tech-items">
-                      <div class="tech-item must-have"><i class="fas fa-object-group"></i> Object-Oriented Programming (OOPs)</div>
-                        <div class="tech-item must-have"><i class="fas fa-project-diagram"></i> Basic Data Structures & Algorithms</div>
-                        <div class="tech-item must-have"><i class="fas fa-cogs"></i> Software Engineering Fundamentals</div>
-                         <div class="tech-item must-have"><i class="fas fa-database"></i> DBMS</div>
-                          <div class="tech-item must-have"><i class="fas fa-desktop"></i> OS </div>
-                    </div>
+            <div class="tech-items">
+              <div class="tech-item must-have">
+                <i class="fas fa-object-group"></i> Object-Oriented Programming
+                (OOPs)
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-project-diagram"></i> Basic Data Structures &
+                Algorithms
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-cogs"></i> Software Engineering Fundamentals
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-database"></i> DBMS
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-desktop"></i> OS
+              </div>
+            </div>
+          </div>
+          <div class="tech-category">
+            <h4><i class="fas fa-tools"></i> Development Tools</h4>
+            <div class="tech-items">
+              <div class="tech-item must-have">
+                <i class="fab fa-git-alt"></i> Git
+              </div>
+              <div class="tech-item must-have">
+                <i class="fab fa-github"></i> GitHub
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-code"></i> VS Code
+              </div>
+              <div class="tech-item must-have">
+                <i class="fas fa-terminal"></i> Command Line
+              </div>
+            </div>
+          </div>
+          <div class="tech-category">
+            <h4><i class="fas fa-laptop-code"></i> Web & Frontend Tools</h4>
+            <div class="tech-items">
+              <div class="tech-item">
+                <i class="fas fa-mobile-alt"></i> Responsive Web Design
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-code-branch"></i> DOM Manipulation
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-plug"></i> API Integration
+              </div>
+              <div class="tech-item">
+                <i class="fab fa-bootstrap"></i> Bootstrap / Tailwind CSS
+              </div>
+            </div>
+          </div>
+          <div class="tech-category">
+            <h4><i class="fas fa-robot"></i> AI & Modern Tools</h4>
+            <div class="tech-items">
+              <div class="tech-item">
+                <i class="fas fa-brain"></i> AI APIs (OpenAI / ChatGPT APIs)
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-comments"></i> Prompt Engineering
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-magic"></i> AI Tools for Development
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-robot"></i> Automation with Python
+              </div>
+            </div>
+          </div>
+          <div class="tech-category">
+            <h4><i class="fas fa-server"></i> Backend & Database</h4>
+            <div class="tech-items">
+              <div class="tech-item"><i class="fas fa-flask"></i> Flask</div>
+              <div class="tech-item">
+                <i class="fas fa-exchange-alt"></i> REST APIs
+              </div>
+              <div class="tech-item"><i class="fas fa-file-code"></i> JSON</div>
+              <div class="tech-item">
+                <i class="fas fa-database"></i> MySQL / SQLite
+              </div>
+              <div class="tech-item">
+                <i class="fab fa-google"></i> Google Sheets as Database
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>VIEW PROJECTS</h2>
+          <p>
+            Groundbreaking projects that demonstrate technical mastery and
+            creative vision
+          </p>
+        </div>
+        <div class="projects-grid">
+          <!-- Project 1: Canvas collab by SJM-->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/canvas-collab.png"
+                alt="Canvas Collab by SJM - Real-time Collaborative Drawing Application"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>CANVAS COLLAB BY SJM</h3>
+              <p>
+                Real-time collaborative drawing app built with HTML5 Canvas and
+                WebSockets. Users can create, share, and collaborate on digital
+                canvases with live updates and intuitive tools for a seamless
+                creative experience.
+              </p>
+              <div class="project-tags">
+                <span class="tag">HTML5 Canvas</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">WebSockets</span>
+                <span class="tag">Real-Time Collaboration</span>
+                <span class="tag">Creative Tools</span>
+              </div>
+              <a
+                href="https://canvas-collab-by-sjm-production.up.railway.app/"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 2: Ace My Study -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/ace-my-study.png"
+                alt="Ace My Study - Study Planning Application"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>ACE MY STUDY</h3>
+              <p>
+                Privacy-focused study planner generating personalized schedules
+                based on subjects, exam dates, and difficulty. Tracks progress
+                with analytics, visualizes performance, stores data locally
+                using JavaScript and Chart.js.
+              </p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">LocalStorage API</span>
+                <span class="tag">Chart.js</span>
+              </div>
+              <a
+                href="https://sjm2006.github.io/Ace-MyStudy/"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 3: Health Monitor Web App -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/Smart-Community.png"
+                alt="Health Monitor Web App — Interactive Wellness Tracker"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>HEALTH MONITOR WEB APP</h3>
+              <p>
+                Interactive wellness tracker built with React and TypeScript.
+                Users assess health through real-time inputs. Features clean
+                UI/UX, efficient client-side logic, and responsive design with
+                Radix UI components.
+              </p>
+              <div class="project-tags">
+                <span class="tag">TypeScript</span>
+                <span class="tag">React</span>
+                <span class="tag">Vite</span>
+                <span class="tag">Radix UI</span>
+                <span class="tag">Lucide React</span>
+                <span class="tag">Recharts</span>
+              </div>
+              <a
+                href="https://sjm2006.github.io/health-monitor-web-app/"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 4: Atmos Weather App -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/atmos-weather.png"
+                alt="Atmos Weather App - Real-time Weather Application"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>ATMOS BY SJM</h3>
+              <p>
+                Responsive weather app delivering live meteorological data for
+                any location. Displays temperature, humidity, wind speed,
+                atmospheric pressure, and 5-day forecast using Weather API and
+                JavaScript integration.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">Weather API</span>
+                <span class="tag">Real-Time Data</span>
+              </div>
+              <a
+                href="https://sjm2006.github.io/Atmos-weather-app/"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 5: Python Quiz App -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/Quiz-app.png"
+                alt="Quiz app Using Python"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>PYTHON QUIZ APP</h3>
+              <p>
+                Desktop trivia game built with Python and Tkinter. Fetches live
+                questions from external API. Features modular code organization,
+                GUI development, and interactive gameplay with real-time scoring
+                system.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">API Integration</span>
+                <span class="tag">GUI Application</span>
+                <span class="tag">Tkinter</span>
+              </div>
+              <a
+                href="https://github.com/Sjm2006/python-quiz-app"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 6: Math Calculator -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/calculator.png"
+                alt="Math Calculator - Web-based Calculator Application"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>MATH CALCULATOR</h3>
+              <p>
+                Web-based calculator performing standard arithmetic operations
+                with clean interface. Supports operator chaining, error
+                handling, and mimics real calculator behavior using JavaScript
+                DOM manipulation and responsive CSS design.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">DOM Manipulation</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">Frontend Logic</span>
+                <span class="tag">Responsive UI</span>
+              </div>
+              <a
+                href="https://sjm2006.github.io/Math-calculator/"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Project</a
+              >
+            </div>
+          </div>
+
+          <!-- Project 7: Coming Soon -->
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="images/coming-soon.png"
+                alt="Coming Soon Project"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="project-info">
+              <h3>COMING SOON</h3>
+              <p>Exciting project in progress. Stay tuned for updates!</p>
+              <div class="project-tags">
+                <span class="tag">Under Development</span>
+                <span class="tag">Planning Phase</span>
+                <span class="tag">UI Designing</span>
+                <span class="tag">Architecture Design</span>
+                <span class="tag">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>COLLABORATE NOW</h2>
+          <p>Let's build something extraordinary together</p>
+        </div>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>CONNECT WITH ME</h3>
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-text">
+                  <h4>EMAIL</h4>
+                  <a href="mailto:soumyajeet2006mondal@gmail.com"
+                    ><small>soumyajeet2006mondal@gmail.com</small></a
+                  >
                 </div>
-        <div class="tech-category">
-          <h4><i class="fas fa-tools"></i> Development Tools</h4>
-          <div class="tech-items">
-           <div class="tech-item must-have"><i class="fab fa-git-alt"></i> Git</div>
-            <div class="tech-item must-have"><i class="fab fa-github"></i> GitHub</div>
-            <div class="tech-item must-have"><i class="fas fa-code"></i> VS Code</div>
-            <div class="tech-item must-have"><i class="fas fa-terminal"></i> Command Line</div>
-          </div>
-        </div>
-        <div class="tech-category">
-          <h4><i class="fas fa-laptop-code"></i> Web & Frontend Tools</h4>
-          <div class="tech-items">
-            <div class="tech-item"><i class="fas fa-mobile-alt"></i> Responsive Web Design</div>
-            <div class="tech-item"><i class="fas fa-code-branch"></i> DOM Manipulation</div>
-            <div class="tech-item"><i class="fas fa-plug"></i> API Integration</div>
-            <div class="tech-item"><i class="fab fa-bootstrap"></i> Bootstrap / Tailwind CSS</div>
-          </div>
-        </div>
-        <div class="tech-category">
-          <h4><i class="fas fa-robot"></i> AI & Modern Tools</h4>
-          <div class="tech-items">
-            <div class="tech-item"><i class="fas fa-brain"></i> AI APIs (OpenAI / ChatGPT APIs)</div>
-            <div class="tech-item"><i class="fas fa-comments"></i> Prompt Engineering</div>
-            <div class="tech-item"><i class="fas fa-magic"></i> AI Tools for Development</div>
-            <div class="tech-item"><i class="fas fa-robot"></i> Automation with Python</div>
-          </div>
-        </div>
-      <div class="tech-category">
-          <h4><i class="fas fa-server"></i> Backend & Database</h4>
-          <div class="tech-items">
-            <div class="tech-item"><i class="fas fa-flask"></i> Flask</div>
-            <div class="tech-item"><i class="fas fa-exchange-alt"></i> REST APIs</div>
-            <div class="tech-item"><i class="fas fa-file-code"></i> JSON</div>
-            <div class="tech-item"><i class="fas fa-database"></i> MySQL / SQLite</div>
-            <div class="tech-item"><i class="fab fa-google"></i> Google Sheets as Database</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-<section id="projects" class="projects-section">
-  <div class="container">
-    <div class="section-title">
-      <h2>VIEW PROJECTS</h2>
-      <p>Groundbreaking projects that demonstrate technical mastery and creative vision</p>
-    </div>
-    <div class="projects-grid">
-      <!-- Project 1: Canvas collab by SJM-->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/canvas-collab.png" alt="Canvas Collab by SJM - Real-time Collaborative Drawing Application">
-        </div>
-        <div class="project-info">
-          <h3>CANVAS COLLAB BY SJM</h3>
-          <p>Real-time collaborative drawing app built with HTML5 Canvas and WebSockets. Users can create, share, and collaborate on digital canvases with live updates and intuitive tools for a seamless creative experience.</p>
-          <div class="project-tags">
-            <span class="tag">HTML5 Canvas</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">WebSockets</span>
-            <span class="tag">Real-Time Collaboration</span>
-            <span class="tag">Creative Tools</span>
-          </div>
-          <a href="https://canvas-collab-by-sjm-production.up.railway.app/" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-        </div>
-        
-
-
-      <!-- Project 2: Ace My Study -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/ace-my-study.png" alt="Ace My Study - Study Planning Application">
-        </div>
-        <div class="project-info">
-          <h3>ACE MY STUDY</h3>
-          <p>Privacy-focused study planner generating personalized schedules based on subjects, exam dates, and difficulty. Tracks progress with analytics, visualizes performance, stores data locally using JavaScript and Chart.js.</p>
-          <div class="project-tags">
-            <span class="tag">HTML5</span>
-            <span class="tag">CSS3</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">LocalStorage API</span>
-            <span class="tag">Chart.js</span>
-          </div>
-          <a href="https://sjm2006.github.io/Ace-MyStudy/" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-      </div>
-      
-      <!-- Project 3: Health Monitor Web App -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/Smart-Community.png" alt="Health Monitor Web App — Interactive Wellness Tracker">
-        </div>
-        <div class="project-info">
-          <h3>HEALTH MONITOR WEB APP</h3>
-          <p>Interactive wellness tracker built with React and TypeScript. Users assess health through real-time inputs. Features clean UI/UX, efficient client-side logic, and responsive design with Radix UI components.</p>
-          <div class="project-tags">
-            <span class="tag">TypeScript</span>
-            <span class="tag">React</span>
-            <span class="tag">Vite</span>
-            <span class="tag">Radix UI</span>
-            <span class="tag">Lucide React</span>
-            <span class="tag">Recharts</span>
-          </div>
-          <a href="https://sjm2006.github.io/health-monitor-web-app/" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-      </div>
-
-      <!-- Project 4: Atmos Weather App -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/atmos-weather.png" alt="Atmos Weather App - Real-time Weather Application">
-        </div>
-        <div class="project-info">
-          <h3>ATMOS BY SJM</h3>
-          <p>Responsive weather app delivering live meteorological data for any location. Displays temperature, humidity, wind speed, atmospheric pressure, and 5-day forecast using Weather API and JavaScript integration.</p>
-          <div class="project-tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML5</span>
-            <span class="tag">CSS3</span>
-            <span class="tag">Weather API</span>
-            <span class="tag">Real-Time Data</span>
-          </div>
-          <a href="https://sjm2006.github.io/Atmos-weather-app/" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-      </div>
-
-      <!-- Project 5: Python Quiz App -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/Quiz-app.png" alt="Quiz app Using Python">
-        </div>
-        <div class="project-info">
-          <h3>PYTHON QUIZ APP</h3>
-          <p>Desktop trivia game built with Python and Tkinter. Fetches live questions from external API. Features modular code organization, GUI development, and interactive gameplay with real-time scoring system.</p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">API Integration</span>
-            <span class="tag">GUI Application</span>
-            <span class="tag">Tkinter</span>
-          </div>
-          <a href="https://github.com/Sjm2006/python-quiz-app" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-      </div>
-      
-      <!-- Project 6: Math Calculator -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/calculator.png" alt="Math Calculator - Web-based Calculator Application">
-        </div>
-        <div class="project-info">
-          <h3>MATH CALCULATOR</h3>
-          <p>Web-based calculator performing standard arithmetic operations with clean interface. Supports operator chaining, error handling, and mimics real calculator behavior using JavaScript DOM manipulation and responsive CSS design.</p>
-          <div class="project-tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">DOM Manipulation</span>
-            <span class="tag">CSS3</span>
-            <span class="tag">Frontend Logic</span>
-            <span class="tag">Responsive UI</span>
-          </div>
-          <a href="https://sjm2006.github.io/Math-calculator/" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-        </div>
-      </div>
-      
-      <!-- Project 7: Coming Soon -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="images/coming-soon.png" alt="Coming Soon Project">
-        </div>
-        <div class="project-info">
-          <h3>COMING SOON</h3>
-          <p>Exciting project in progress. Stay tuned for updates!</p>
-          <div class="project-tags">
-            <span class="tag">Under Development</span>
-            <span class="tag">Planning Phase</span>
-            <span class="tag">UI Designing</span>
-            <span class="tag">Architecture Design</span>
-            <span class="tag">Coming Soon</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>COLLABORATE NOW</h2>
-        <p>Let's build something extraordinary together</p>
-      </div>
-      <div class="contact-container">
-        <div class="contact-info">
-          <h3>CONNECT WITH ME</h3>
-          <div class="contact-details">
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div class="contact-text">
-                <h4>EMAIL</h4>
-                <a href="mailto:soumyajeet2006mondal@gmail.com"><small>soumyajeet2006mondal@gmail.com</small></a>
               </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fab fa-github"></i></div>
-              <div class="contact-text">
-                <h4>GITHUB</h4>
-                <a href="https://github.com/Sjm2006" target="_blank" rel="noopener noreferrer">Sjm2006</a>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-github"></i></div>
+                <div class="contact-text">
+                  <h4>GITHUB</h4>
+                  <a
+                    href="https://github.com/Sjm2006"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Sjm2006</a
+                  >
+                </div>
               </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
-              <div class="contact-text">
-                <h4>LINKEDIN</h4>
-                <a href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202" target="_blank" rel="noopener noreferrer">Soumyajeet Mondal</a>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>LINKEDIN</h4>
+                  <a
+                    href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Soumyajeet Mondal</a
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="contact-form">
-          <form id="contactForm" method="POST">
-            <div class="form-group">
-              <label for="name">FULL NAME</label>
-              <input type="text" id="name" name="from_name" placeholder="Enter your full name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">EMAIL ADDRESS</label>
-              <input type="email" id="email" name="reply_to" placeholder="Enter your email address" required />
-            </div>
-            <div class="form-group">
-              <label for="message">PROJECT BRIEF</label>
-              <textarea id="message" name="message" placeholder="Describe your project or collaboration idea..." required></textarea>
-            </div>
-            <button type="submit" class="btn">SEND MESSAGE</button>
-          </form>
+          <div class="contact-form">
+            <form id="contactForm" method="POST">
+              <div class="form-group">
+                <label for="name">FULL NAME</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="from_name"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">EMAIL ADDRESS</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="reply_to"
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">PROJECT BRIEF</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Describe your project or collaboration idea..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn">SEND MESSAGE</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="social-links">
-        <a href="https://github.com/Sjm2006" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.facebook.com/share/1aiANC8QG1/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/sjm____18" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="social-links">
+          <a
+            href="https://github.com/Sjm2006"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="GitHub"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/soumyajeet-mondal-84220a202"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a
+            href="https://www.facebook.com/share/1aiANC8QG1/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Facebook"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/sjm____18"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </div>
+        <div class="copyright">
+          &copy; 2026 Soumyajeet Mondal. All rights reserved.
+        </div>
       </div>
-      <div class="copyright">&copy; 2026 Soumyajeet Mondal. All rights reserved.</div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="script.js"></script>
-</body>
+    <!-- Quick return button for long pages -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
 </html>

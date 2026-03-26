@@ -2,26 +2,26 @@
 
 // Get container size dynamically
 function getContainerSize() {
-  const photoContainer = document.getElementById('photoContainer');
+  const photoContainer = document.getElementById("photoContainer");
   if (!photoContainer) return 420;
   return Math.min(photoContainer.offsetWidth, 420);
 }
 
 // Create orbit rings around photo - mobile responsive
 function createOrbitRings() {
-  const photoContainer = document.getElementById('photoContainer');
+  const photoContainer = document.getElementById("photoContainer");
   if (!photoContainer) return;
-  
+
   const containerSize = getContainerSize();
   const sizes = [
     containerSize,
     containerSize * 0.857, // 360/420
-    containerSize * 0.714  // 300/420
+    containerSize * 0.714, // 300/420
   ];
-  
+
   for (let i = 0; i < 3; i++) {
-    const ring = document.createElement('div');
-    ring.className = 'orbit-ring';
+    const ring = document.createElement("div");
+    ring.className = "orbit-ring";
     ring.style.width = `${sizes[i]}px`;
     ring.style.height = `${sizes[i]}px`;
     ring.style.left = `${(containerSize - sizes[i]) / 2}px`;
@@ -33,31 +33,32 @@ function createOrbitRings() {
 
 // Create moving particles around photo - mobile responsive
 function createMovingParticles() {
-  const photoContainer = document.getElementById('photoContainer');
+  const photoContainer = document.getElementById("photoContainer");
   if (!photoContainer) return;
-  
+
   const containerSize = getContainerSize();
   const center = containerSize / 2;
-  
+
   // Reduce particle count on smaller screens
   const particleCount = window.innerWidth < 768 ? 8 : 12;
-  
+
   for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'moving-particle';
+    const particle = document.createElement("div");
+    particle.className = "moving-particle";
     const angle = (i / particleCount) * Math.PI * 2;
-    const distance = (containerSize * 0.52) + Math.random() * (containerSize * 0.19);
+    const distance =
+      containerSize * 0.52 + Math.random() * (containerSize * 0.19);
     const startRadius = containerSize * 0.36;
-    
+
     const startX = center + Math.cos(angle) * startRadius;
     const startY = center + Math.sin(angle) * startRadius;
     const endX = center + Math.cos(angle + Math.PI) * distance;
     const endY = center + Math.sin(angle + Math.PI) * distance;
-    
+
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
-    particle.style.setProperty('--tx', `${endX - startX}px`);
-    particle.style.setProperty('--ty', `${endY - startY}px`);
+    particle.style.setProperty("--tx", `${endX - startX}px`);
+    particle.style.setProperty("--ty", `${endY - startY}px`);
     particle.style.animationDelay = `${Math.random() * 5}s`;
     particle.style.animationDuration = `${Math.random() * 8 + 10}s`;
     photoContainer.appendChild(particle);
@@ -66,22 +67,22 @@ function createMovingParticles() {
 
 // Create circuit lines - reduce on mobile
 function createCircuitLines() {
-  const circuitContainer = document.getElementById('circuitLines');
+  const circuitContainer = document.getElementById("circuitLines");
   if (!circuitContainer) return;
-  
+
   // Reduce line count on mobile for better performance
   const lineCount = window.innerWidth < 768 ? 8 : 15;
-  
+
   for (let i = 0; i < lineCount; i++) {
-    const line = document.createElement('div');
-    line.className = 'circuit-line';
+    const line = document.createElement("div");
+    line.className = "circuit-line";
     const width = Math.random() * 200 + 50;
     const height = Math.random() * 200 + 50;
     const posX = Math.random() * 100;
     const posY = Math.random() * 100;
     const rotation = Math.random() * 360;
-    line.style.width = `${Math.random() > 0.5 ? width + 'px' : '3px'}`;
-    line.style.height = `${Math.random() > 0.5 ? height + 'px' : '3px'}`;
+    line.style.width = `${Math.random() > 0.5 ? width + "px" : "3px"}`;
+    line.style.height = `${Math.random() > 0.5 ? height + "px" : "3px"}`;
     line.style.left = `${posX}%`;
     line.style.top = `${posY}%`;
     line.style.transform = `rotate(${rotation}deg)`;
@@ -93,13 +94,15 @@ function createCircuitLines() {
 
 // Clear and recreate animations on resize
 function reinitializeAnimations() {
-  const photoContainer = document.getElementById('photoContainer');
+  const photoContainer = document.getElementById("photoContainer");
   if (!photoContainer) return;
-  
+
   // Remove existing orbit rings and particles
-  const existingRings = photoContainer.querySelectorAll('.orbit-ring, .moving-particle');
-  existingRings.forEach(el => el.remove());
-  
+  const existingRings = photoContainer.querySelectorAll(
+    ".orbit-ring, .moving-particle",
+  );
+  existingRings.forEach((el) => el.remove());
+
   // Recreate with new sizes
   createOrbitRings();
   createMovingParticles();
@@ -123,29 +126,110 @@ const debouncedResize = debounce(() => {
   reinitializeAnimations();
 }, 250);
 
-window.addEventListener('resize', debouncedResize);
+window.addEventListener("resize", debouncedResize);
+
+// ------------------------------
+// UX helpers for navigation and scrolling
+// ------------------------------
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("primaryNav");
+const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+const scrollProgress = document.getElementById("scrollProgress");
+const backToTop = document.getElementById("backToTop");
+
+// Mobile menu open/close
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Close menu when a user clicks any navigation link
+  navItems.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Close mobile menu when clicking outside it
+  document.addEventListener("click", (event) => {
+    if (!navLinks.classList.contains("open")) return;
+    const clickedInsideMenu =
+      navLinks.contains(event.target) || menuToggle.contains(event.target);
+    if (!clickedInsideMenu) {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+// Update progress bar and "back to top" visibility while scrolling
+function updateScrollUI() {
+  const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollY = window.scrollY;
+  const progress = pageHeight > 0 ? (scrollY / pageHeight) * 100 : 0;
+
+  if (scrollProgress) {
+    scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+  }
+
+  if (backToTop) {
+    backToTop.classList.toggle("visible", scrollY > 500);
+  }
+}
+
+// Highlight the nav item for the section currently visible on screen
+function updateActiveNav() {
+  const sections = document.querySelectorAll("section[id]");
+  const scrollPosition = window.scrollY + 120;
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionBottom = sectionTop + section.offsetHeight;
+    const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+
+    if (!link) return;
+    const isActive =
+      scrollPosition >= sectionTop && scrollPosition < sectionBottom;
+    link.classList.toggle("active", isActive);
+  });
+}
+
+window.addEventListener("scroll", () => {
+  updateScrollUI();
+  updateActiveNav();
+});
+
+if (backToTop) {
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
       const headerOffset = 80;
       const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
-      
+
       // Track navigation click in Google Analytics
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'navigation_click', {
-          'event_category': 'Navigation',
-          'event_label': this.getAttribute('href'),
-          'value': 1
+      if (typeof gtag !== "undefined") {
+        gtag("event", "navigation_click", {
+          event_category: "Navigation",
+          event_label: this.getAttribute("href"),
+          value: 1,
         });
       }
     }
@@ -153,131 +237,142 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Initialize EmailJS with your Public Key
-(function() {
+(function () {
   try {
     emailjs.init("BW-BZcyECGiOQe0zP");
-    console.log('✅ EmailJS initialized successfully');
+    console.log("✅ EmailJS initialized successfully");
   } catch (error) {
-    console.error('❌ EmailJS initialization failed:', error);
+    console.error("❌ EmailJS initialization failed:", error);
   }
 })();
 
 // Form submission handling with EmailJS - Mobile Optimized + Auto Reply
-const contactForm = document.getElementById('contactForm');
+const contactForm = document.getElementById("contactForm");
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
     e.stopPropagation();
-    
-    console.log('📝 Form submitted');
-    
+
+    console.log("📝 Form submitted");
+
     // Get form values directly
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const messageInput = document.getElementById("message");
+
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
-    
-    console.log('📋 Form data:', { name, email, message });
-    
+
+    console.log("📋 Form data:", { name, email, message });
+
     // Validate inputs
     if (!name || !email || !message) {
-      alert('Please fill in all fields');
+      alert("Please fill in all fields");
       return;
     }
-    
+
     // Show loading state
     const submitBtn = this.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'SENDING...';
+    submitBtn.textContent = "SENDING...";
     submitBtn.disabled = true;
-    
+
     // Prepare template parameters
     const templateParams = {
       from_name: name,
       reply_to: email,
       message: message,
-      to_name: 'Soumyajeet'
+      to_name: "Soumyajeet",
     };
-    
-    console.log('📧 Sending emails with params:', templateParams);
-    
+
+    console.log("📧 Sending emails with params:", templateParams);
+
     // Send email to YOU (notification)
-    console.log('📤 Sending notification email to you...');
-    const sendToMe = emailjs.send('service_il351vr', 'template_t9o5rdq', templateParams)
-      .then(response => {
-        console.log('✅ Notification email sent successfully!', response);
+    console.log("📤 Sending notification email to you...");
+    const sendToMe = emailjs
+      .send("service_il351vr", "template_t9o5rdq", templateParams)
+      .then((response) => {
+        console.log("✅ Notification email sent successfully!", response);
         return response;
       })
-      .catch(error => {
-        console.error('❌ Notification email failed:', error);
+      .catch((error) => {
+        console.error("❌ Notification email failed:", error);
         throw error;
       });
-    
+
     // Send auto-reply to SENDER
-    console.log('📤 Sending auto-reply email to sender...');
-    const sendToSender = emailjs.send('service_il351vr', 'template_oyp16d8', templateParams)
-      .then(response => {
-        console.log('✅ Auto-reply email sent successfully!', response);
+    console.log("📤 Sending auto-reply email to sender...");
+    const sendToSender = emailjs
+      .send("service_il351vr", "template_oyp16d8", templateParams)
+      .then((response) => {
+        console.log("✅ Auto-reply email sent successfully!", response);
         return response;
       })
-      .catch(error => {
-        console.error('❌ Auto-reply email failed:', error);
+      .catch((error) => {
+        console.error("❌ Auto-reply email failed:", error);
         throw error;
       });
-    
+
     // Wait for both emails to send
     Promise.all([sendToMe, sendToSender])
-      .then(function(responses) {
-        console.log('🎉 Both emails sent successfully!', responses);
-        
+      .then(function (responses) {
+        console.log("🎉 Both emails sent successfully!", responses);
+
         // Track successful form submission in Google Analytics
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submission', {
-            'event_category': 'Contact',
-            'event_label': 'Contact Form Submitted',
-            'value': 1
+        if (typeof gtag !== "undefined") {
+          gtag("event", "form_submission", {
+            event_category: "Contact",
+            event_label: "Contact Form Submitted",
+            value: 1,
           });
         }
-        
-        alert('Thank you, ' + name + '! Your message has been sent successfully. You\'ll receive a confirmation email shortly. I\'ll get back to you within 24 hours.');
-        
+
+        alert(
+          "Thank you, " +
+            name +
+            "! Your message has been sent successfully. You'll receive a confirmation email shortly. I'll get back to you within 24 hours.",
+        );
+
         // Reset form
-        nameInput.value = '';
-        emailInput.value = '';
-        messageInput.value = '';
-        
+        nameInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
+
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       })
-      .catch(function(error) {
-        console.error('💥 Failed to send emails:', error);
-        console.error('Error details:', {
+      .catch(function (error) {
+        console.error("💥 Failed to send emails:", error);
+        console.error("Error details:", {
           text: error.text,
           status: error.status,
-          message: error.message
+          message: error.message,
         });
-        
+
         // Track form error in Google Analytics
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_error', {
-            'event_category': 'Contact',
-            'event_label': 'Contact Form Error',
-            'value': 0
+        if (typeof gtag !== "undefined") {
+          gtag("event", "form_error", {
+            event_category: "Contact",
+            event_label: "Contact Form Error",
+            value: 0,
           });
         }
-        
+
         // Check which email failed
-        if (error.text && error.text.includes('template_t9o5rdq')) {
-          alert('Failed to send notification email. Please try again.');
-        } else if (error.text && error.text.includes('template_oyp16d8')) {
-          alert('Your message was sent, but the auto-reply failed. I\'ll still respond within 24 hours!');
+        if (error.text && error.text.includes("template_t9o5rdq")) {
+          alert("Failed to send notification email. Please try again.");
+        } else if (error.text && error.text.includes("template_oyp16d8")) {
+          alert(
+            "Your message was sent, but the auto-reply failed. I'll still respond within 24 hours!",
+          );
         } else {
-          alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: ' + (error.text || error.message || 'Unknown error'));
+          alert(
+            "Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: " +
+              (error.text || error.message || "Unknown error"),
+          );
         }
-        
+
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       });
@@ -287,44 +382,52 @@ if (contactForm) {
 // Track CV download button clicks
 const cvButton = document.querySelector('a[href*="CV.pdf"]');
 if (cvButton) {
-  cvButton.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'cv_download', {
-        'event_category': 'Downloads',
-        'event_label': 'CV Download',
-        'value': 1
+  cvButton.addEventListener("click", function () {
+    if (typeof gtag !== "undefined") {
+      gtag("event", "cv_download", {
+        event_category: "Downloads",
+        event_label: "CV Download",
+        value: 1,
       });
     }
   });
 }
 
 // Track project link clicks
-document.querySelectorAll('.project-card a[href*="github.io"]').forEach(link => {
-  link.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      const projectName = this.closest('.project-card').querySelector('h3').textContent;
-      gtag('event', 'project_view', {
-        'event_category': 'Projects',
-        'event_label': projectName,
-        'value': 1
-      });
-    }
+document
+  .querySelectorAll('.project-card a[href*="github.io"]')
+  .forEach((link) => {
+    link.addEventListener("click", function () {
+      if (typeof gtag !== "undefined") {
+        const projectName =
+          this.closest(".project-card").querySelector("h3").textContent;
+        gtag("event", "project_view", {
+          event_category: "Projects",
+          event_label: projectName,
+          value: 1,
+        });
+      }
+    });
   });
-});
 
 // Track social media link clicks
-document.querySelectorAll('.social-link, .social-link-hero').forEach(link => {
-  link.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      const platform = this.href.includes('github') ? 'GitHub' :
-                      this.href.includes('linkedin') ? 'LinkedIn' :
-                      this.href.includes('facebook') ? 'Facebook' :
-                      this.href.includes('instagram') ? 'Instagram' : 'Unknown';
-      
-      gtag('event', 'social_click', {
-        'event_category': 'Social Media',
-        'event_label': platform,
-        'value': 1
+document.querySelectorAll(".social-link, .social-link-hero").forEach((link) => {
+  link.addEventListener("click", function () {
+    if (typeof gtag !== "undefined") {
+      const platform = this.href.includes("github")
+        ? "GitHub"
+        : this.href.includes("linkedin")
+          ? "LinkedIn"
+          : this.href.includes("facebook")
+            ? "Facebook"
+            : this.href.includes("instagram")
+              ? "Instagram"
+              : "Unknown";
+
+      gtag("event", "social_click", {
+        event_category: "Social Media",
+        event_label: platform,
+        value: 1,
       });
     }
   });
@@ -332,75 +435,86 @@ document.querySelectorAll('.social-link, .social-link-hero').forEach(link => {
 
 // Track scroll depth (25%, 50%, 75%, 100%)
 let scrollTracked = {
-  '25': false,
-  '50': false,
-  '75': false,
-  '100': false
+  25: false,
+  50: false,
+  75: false,
+  100: false,
 };
 
-window.addEventListener('scroll', debounce(function() {
-  const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
-  
-  if (scrollPercent >= 25 && !scrollTracked['25']) {
-    scrollTracked['25'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '25% Scroll',
-        'value': 25
-      });
+window.addEventListener(
+  "scroll",
+  debounce(function () {
+    const scrollPercent = Math.round(
+      (window.scrollY /
+        (document.documentElement.scrollHeight - window.innerHeight)) *
+        100,
+    );
+
+    if (scrollPercent >= 25 && !scrollTracked["25"]) {
+      scrollTracked["25"] = true;
+      if (typeof gtag !== "undefined") {
+        gtag("event", "scroll_depth", {
+          event_category: "Engagement",
+          event_label: "25% Scroll",
+          value: 25,
+        });
+      }
     }
-  }
-  if (scrollPercent >= 50 && !scrollTracked['50']) {
-    scrollTracked['50'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '50% Scroll',
-        'value': 50
-      });
+    if (scrollPercent >= 50 && !scrollTracked["50"]) {
+      scrollTracked["50"] = true;
+      if (typeof gtag !== "undefined") {
+        gtag("event", "scroll_depth", {
+          event_category: "Engagement",
+          event_label: "50% Scroll",
+          value: 50,
+        });
+      }
     }
-  }
-  if (scrollPercent >= 75 && !scrollTracked['75']) {
-    scrollTracked['75'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '75% Scroll',
-        'value': 75
-      });
+    if (scrollPercent >= 75 && !scrollTracked["75"]) {
+      scrollTracked["75"] = true;
+      if (typeof gtag !== "undefined") {
+        gtag("event", "scroll_depth", {
+          event_category: "Engagement",
+          event_label: "75% Scroll",
+          value: 75,
+        });
+      }
     }
-  }
-  if (scrollPercent >= 95 && !scrollTracked['100']) {
-    scrollTracked['100'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '100% Scroll',
-        'value': 100
-      });
+    if (scrollPercent >= 95 && !scrollTracked["100"]) {
+      scrollTracked["100"] = true;
+      if (typeof gtag !== "undefined") {
+        gtag("event", "scroll_depth", {
+          event_category: "Engagement",
+          event_label: "100% Scroll",
+          value: 100,
+        });
+      }
     }
-  }
-}, 500));
+  }, 500),
+);
 
 // Initialize all animations on load
-window.addEventListener('load', function() {
+window.addEventListener("load", function () {
   createOrbitRings();
   createMovingParticles();
   createCircuitLines();
-  
+  updateScrollUI();
+  updateActiveNav();
+
   // Track page load time
-  if (typeof gtag !== 'undefined' && window.performance) {
-    const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-    gtag('event', 'page_load_time', {
-      'event_category': 'Performance',
-      'event_label': 'Load Time (ms)',
-      'value': loadTime
+  if (typeof gtag !== "undefined" && window.performance) {
+    const loadTime =
+      window.performance.timing.loadEventEnd -
+      window.performance.timing.navigationStart;
+    gtag("event", "page_load_time", {
+      event_category: "Performance",
+      event_label: "Load Time (ms)",
+      value: loadTime,
     });
   }
 });
 
 // Handle orientation change on mobile devices
-window.addEventListener('orientationchange', function() {
+window.addEventListener("orientationchange", function () {
   setTimeout(reinitializeAnimations, 200);
 });
