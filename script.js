@@ -1,406 +1,238 @@
-// script.js
+// ============================================================
+// 3D IMMERSIVE PORTFOLIO — CLEAN INTERACTIVE ENGINE
+// ============================================================
 
-// Get container size dynamically
-function getContainerSize() {
-  const photoContainer = document.getElementById('photoContainer');
-  if (!photoContainer) return 420;
-  return Math.min(photoContainer.offsetWidth, 420);
-}
-
-// Create orbit rings around photo - mobile responsive
-function createOrbitRings() {
-  const photoContainer = document.getElementById('photoContainer');
-  if (!photoContainer) return;
-  
-  const containerSize = getContainerSize();
-  const sizes = [
-    containerSize,
-    containerSize * 0.857, // 360/420
-    containerSize * 0.714  // 300/420
-  ];
-  
-  for (let i = 0; i < 3; i++) {
-    const ring = document.createElement('div');
-    ring.className = 'orbit-ring';
-    ring.style.width = `${sizes[i]}px`;
-    ring.style.height = `${sizes[i]}px`;
-    ring.style.left = `${(containerSize - sizes[i]) / 2}px`;
-    ring.style.top = `${(containerSize - sizes[i]) / 2}px`;
-    ring.style.animationDelay = `-${i * 2}s`;
-    photoContainer.appendChild(ring);
-  }
-}
-
-// Create moving particles around photo - mobile responsive
-function createMovingParticles() {
-  const photoContainer = document.getElementById('photoContainer');
-  if (!photoContainer) return;
-  
-  const containerSize = getContainerSize();
-  const center = containerSize / 2;
-  
-  // Reduce particle count on smaller screens
-  const particleCount = window.innerWidth < 768 ? 8 : 12;
-  
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'moving-particle';
-    const angle = (i / particleCount) * Math.PI * 2;
-    const distance = (containerSize * 0.52) + Math.random() * (containerSize * 0.19);
-    const startRadius = containerSize * 0.36;
-    
-    const startX = center + Math.cos(angle) * startRadius;
-    const startY = center + Math.sin(angle) * startRadius;
-    const endX = center + Math.cos(angle + Math.PI) * distance;
-    const endY = center + Math.sin(angle + Math.PI) * distance;
-    
-    particle.style.left = `${startX}px`;
-    particle.style.top = `${startY}px`;
-    particle.style.setProperty('--tx', `${endX - startX}px`);
-    particle.style.setProperty('--ty', `${endY - startY}px`);
-    particle.style.animationDelay = `${Math.random() * 5}s`;
-    particle.style.animationDuration = `${Math.random() * 8 + 10}s`;
-    photoContainer.appendChild(particle);
-  }
-}
-
-// Create circuit lines - reduce on mobile
-function createCircuitLines() {
-  const circuitContainer = document.getElementById('circuitLines');
-  if (!circuitContainer) return;
-  
-  // Reduce line count on mobile for better performance
-  const lineCount = window.innerWidth < 768 ? 8 : 15;
-  
-  for (let i = 0; i < lineCount; i++) {
-    const line = document.createElement('div');
-    line.className = 'circuit-line';
-    const width = Math.random() * 200 + 50;
-    const height = Math.random() * 200 + 50;
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
-    const rotation = Math.random() * 360;
-    line.style.width = `${Math.random() > 0.5 ? width + 'px' : '3px'}`;
-    line.style.height = `${Math.random() > 0.5 ? height + 'px' : '3px'}`;
-    line.style.left = `${posX}%`;
-    line.style.top = `${posY}%`;
-    line.style.transform = `rotate(${rotation}deg)`;
-    line.style.animationDelay = `${Math.random() * 5}s`;
-    line.style.animationDuration = `${Math.random() * 6 + 4}s`;
-    circuitContainer.appendChild(line);
-  }
-}
-
-// Clear and recreate animations on resize
-function reinitializeAnimations() {
-  const photoContainer = document.getElementById('photoContainer');
-  if (!photoContainer) return;
-  
-  // Remove existing orbit rings and particles
-  const existingRings = photoContainer.querySelectorAll('.orbit-ring, .moving-particle');
-  existingRings.forEach(el => el.remove());
-  
-  // Recreate with new sizes
-  createOrbitRings();
-  createMovingParticles();
-}
-
-// Debounce function to limit resize event calls
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Handle window resize for responsive animations
-const debouncedResize = debounce(() => {
-  reinitializeAnimations();
-}, 250);
-
-window.addEventListener('resize', debouncedResize);
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const headerOffset = 80;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
-      // Track navigation click in Google Analytics
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'navigation_click', {
-          'event_category': 'Navigation',
-          'event_label': this.getAttribute('href'),
-          'value': 1
-        });
-      }
-    }
-  });
-});
-
-// Initialize EmailJS with your Public Key
-(function() {
-  try {
-    emailjs.init("BW-BZcyECGiOQe0zP");
-    console.log('✅ EmailJS initialized successfully');
-  } catch (error) {
-    console.error('❌ EmailJS initialization failed:', error);
+// EmailJS Init
+(function () {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init("YOUR_PUBLIC_KEY");
   }
 })();
 
-// Form submission handling with EmailJS - Mobile Optimized + Auto Reply
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    console.log('📝 Form submitted');
-    
-    // Get form values directly
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
-    
-    console.log('📋 Form data:', { name, email, message });
-    
-    // Validate inputs
-    if (!name || !email || !message) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    // Show loading state
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'SENDING...';
-    submitBtn.disabled = true;
-    
-    // Prepare template parameters
-    const templateParams = {
-      from_name: name,
-      reply_to: email,
-      message: message,
-      to_name: 'Soumyajeet'
-    };
-    
-    console.log('📧 Sending emails with params:', templateParams);
-    
-    // Send email to YOU (notification)
-    console.log('📤 Sending notification email to you...');
-    const sendToMe = emailjs.send('service_il351vr', 'template_t9o5rdq', templateParams)
-      .then(response => {
-        console.log('✅ Notification email sent successfully!', response);
-        return response;
-      })
-      .catch(error => {
-        console.error('❌ Notification email failed:', error);
-        throw error;
-      });
-    
-    // Send auto-reply to SENDER
-    console.log('📤 Sending auto-reply email to sender...');
-    const sendToSender = emailjs.send('service_il351vr', 'template_oyp16d8', templateParams)
-      .then(response => {
-        console.log('✅ Auto-reply email sent successfully!', response);
-        return response;
-      })
-      .catch(error => {
-        console.error('❌ Auto-reply email failed:', error);
-        throw error;
-      });
-    
-    // Wait for both emails to send
-    Promise.all([sendToMe, sendToSender])
-      .then(function(responses) {
-        console.log('🎉 Both emails sent successfully!', responses);
-        
-        // Track successful form submission in Google Analytics
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submission', {
-            'event_category': 'Contact',
-            'event_label': 'Contact Form Submitted',
-            'value': 1
-          });
-        }
-        
-        alert('Thank you, ' + name + '! Your message has been sent successfully. You\'ll receive a confirmation email shortly. I\'ll get back to you within 24 hours.');
-        
-        // Reset form
-        nameInput.value = '';
-        emailInput.value = '';
-        messageInput.value = '';
-        
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      })
-      .catch(function(error) {
-        console.error('💥 Failed to send emails:', error);
-        console.error('Error details:', {
-          text: error.text,
-          status: error.status,
-          message: error.message
-        });
-        
-        // Track form error in Google Analytics
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_error', {
-            'event_category': 'Contact',
-            'event_label': 'Contact Form Error',
-            'value': 0
-          });
-        }
-        
-        // Check which email failed
-        if (error.text && error.text.includes('template_t9o5rdq')) {
-          alert('Failed to send notification email. Please try again.');
-        } else if (error.text && error.text.includes('template_oyp16d8')) {
-          alert('Your message was sent, but the auto-reply failed. I\'ll still respond within 24 hours!');
-        } else {
-          alert('Oops! Something went wrong. Please try again or contact me directly at soumyajeet2006mondal@gmail.com\n\nError: ' + (error.text || error.message || 'Unknown error'));
-        }
-        
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      });
-  });
+// ============ PARTICLE BACKGROUND ============
+// NOTE: Replaced by Three.js 3D background (threejs-bg.js)
+// Keeping function stub to avoid errors if called elsewhere
+function initParticles() {
+  // No-op: Three.js canvas handles the particle/background layer
 }
 
-// Track CV download button clicks
-const cvButton = document.querySelector('a[href*="CV.pdf"]');
-if (cvButton) {
-  cvButton.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'cv_download', {
-        'event_category': 'Downloads',
-        'event_label': 'CV Download',
-        'value': 1
-      });
-    }
-  });
-}
-
-// Track project link clicks
-document.querySelectorAll('.project-card a[href*="github.io"]').forEach(link => {
-  link.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      const projectName = this.closest('.project-card').querySelector('h3').textContent;
-      gtag('event', 'project_view', {
-        'event_category': 'Projects',
-        'event_label': projectName,
-        'value': 1
-      });
-    }
-  });
-});
-
-// Track social media link clicks
-document.querySelectorAll('.social-link, .social-link-hero').forEach(link => {
-  link.addEventListener('click', function() {
-    if (typeof gtag !== 'undefined') {
-      const platform = this.href.includes('github') ? 'GitHub' :
-                      this.href.includes('linkedin') ? 'LinkedIn' :
-                      this.href.includes('facebook') ? 'Facebook' :
-                      this.href.includes('instagram') ? 'Instagram' : 'Unknown';
-      
-      gtag('event', 'social_click', {
-        'event_category': 'Social Media',
-        'event_label': platform,
-        'value': 1
-      });
-    }
-  });
-});
-
-// Track scroll depth (25%, 50%, 75%, 100%)
-let scrollTracked = {
-  '25': false,
-  '50': false,
-  '75': false,
-  '100': false
-};
-
-window.addEventListener('scroll', debounce(function() {
-  const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+// ============ 3D TILT ON CARDS ============
+function initTilt() {
+  if ('ontouchstart' in window) return;
   
-  if (scrollPercent >= 25 && !scrollTracked['25']) {
-    scrollTracked['25'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '25% Scroll',
-        'value': 25
-      });
-    }
-  }
-  if (scrollPercent >= 50 && !scrollTracked['50']) {
-    scrollTracked['50'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '50% Scroll',
-        'value': 50
-      });
-    }
-  }
-  if (scrollPercent >= 75 && !scrollTracked['75']) {
-    scrollTracked['75'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '75% Scroll',
-        'value': 75
-      });
-    }
-  }
-  if (scrollPercent >= 95 && !scrollTracked['100']) {
-    scrollTracked['100'] = true;
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'scroll_depth', {
-        'event_category': 'Engagement',
-        'event_label': '100% Scroll',
-        'value': 100
-      });
-    }
-  }
-}, 500));
-
-// Initialize all animations on load
-window.addEventListener('load', function() {
-  createOrbitRings();
-  createMovingParticles();
-  createCircuitLines();
-  
-  // Track page load time
-  if (typeof gtag !== 'undefined' && window.performance) {
-    const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-    gtag('event', 'page_load_time', {
-      'event_category': 'Performance',
-      'event_label': 'Load Time (ms)',
-      'value': loadTime
+  document.querySelectorAll('.project-card, .about-card, .tech-category').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      el.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
+      el.style.transition = 'transform 0.1s ease-out';
     });
-  }
-});
 
-// Handle orientation change on mobile devices
-window.addEventListener('orientationchange', function() {
-  setTimeout(reinitializeAnimations, 200);
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+  });
+}
+
+// ============ HERO PARALLAX ============
+function initHeroParallax() {
+  if ('ontouchstart' in window) return;
+  const photo = document.getElementById('photoContainer');
+  const hero = document.querySelector('.hero');
+  if (!photo || !hero) return;
+
+  hero.addEventListener('mousemove', e => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    photo.style.transform = `translate(${x * 20}px, ${y * 20}px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    photo.style.transition = 'transform 0.12s ease-out';
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    photo.style.transform = '';
+    photo.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+  });
+}
+
+// ============ SCROLL REVEAL ============
+function initReveal() {
+  const els = document.querySelectorAll(
+    '.about-card, .timeline-item, .tech-category, .project-card, .contact-item, .contact-form, .section-title'
+  );
+
+  els.forEach((el, i) => {
+    el.setAttribute('data-reveal', '');
+    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => observer.observe(el));
+}
+
+// ============ HEADER SCROLL STATE ============
+function initHeader() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+// ============ ACTIVE NAV ============
+function initActiveNav() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) {
+        current = s.getAttribute('id');
+      }
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+    });
+  }, { passive: true });
+}
+
+// ============ SMOOTH SCROLL ============
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+// ============ ORBIT RINGS & PARTICLES ============
+function initOrbitRings() {
+  const container = document.getElementById('photoContainer');
+  if (!container) return;
+
+  [340, 360, 380].forEach((size, i) => {
+    const ring = document.createElement('div');
+    ring.className = 'orbit-ring';
+    ring.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      top: ${(380 - size) / 2}px; left: ${(380 - size) / 2}px;
+      animation-duration: ${30 + i * 12}s;
+      ${i % 2 ? 'animation-direction: reverse;' : ''}
+    `;
+    container.appendChild(ring);
+  });
+
+  for (let i = 0; i < 4; i++) {
+    const p = document.createElement('div');
+    p.className = 'moving-particle';
+    p.style.cssText = `
+      top: ${Math.random() * 100}%;
+      left: ${Math.random() * 100}%;
+      --tx: ${(Math.random() - 0.5) * 180}px;
+      --ty: ${(Math.random() - 0.5) * 180}px;
+      animation-duration: ${10 + Math.random() * 10}s;
+      animation-delay: ${Math.random() * 5}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+// ============ CONTACT FORM ============
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = 'SENDING...';
+    btn.disabled = true;
+
+    if (typeof emailjs !== 'undefined') {
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this).then(
+        () => {
+          btn.textContent = '✓ SENT SUCCESSFULLY';
+          btn.style.background = '#059669';
+          form.reset();
+          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
+        },
+        () => {
+          btn.textContent = '✗ FAILED TO SEND';
+          btn.style.background = '#dc2626';
+          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
+        }
+      );
+    }
+  });
+}
+
+// ============ MAGNETIC BUTTONS ============
+function initMagnetic() {
+  if ('ontouchstart' in window) return;
+
+  document.querySelectorAll('.btn, .social-link-hero, .social-link').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
+      el.style.transition = 'transform 0.1s ease-out';
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+  });
+}
+
+// ============ CIRCUIT LINES ============
+function initCircuitLines() {
+  const container = document.getElementById('circuitLines');
+  if (!container) return;
+  container.innerHTML = '';
+
+  for (let i = 0; i < 10; i++) {
+    const line = document.createElement('div');
+    line.className = 'circuit-line';
+    const h = Math.random() > 0.5;
+    Object.assign(line.style, {
+      position: 'absolute',
+      width: h ? `${60 + Math.random() * 120}px` : '1px',
+      height: h ? '1px' : `${60 + Math.random() * 120}px`,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      background: `rgba(124, 92, 252, ${0.08 + Math.random() * 0.1})`,
+      animationDelay: `${Math.random() * 4}s`,
+    });
+    container.appendChild(line);
+  }
+}
+
+// ============ INIT ALL ============
+document.addEventListener('DOMContentLoaded', () => {
+  initParticles();
+  initCircuitLines();
+  initOrbitRings();
+  initReveal();
+  initHeader();
+  initActiveNav();
+  initSmoothScroll();
+  initContactForm();
+  initTilt();
+  initHeroParallax();
+  initMagnetic();
 });

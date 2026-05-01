@@ -54,6 +54,9 @@
   
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Three.js r128 via CDN — 3D background engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   
   <!-- Structured Data (Schema.org) -->
   <script type="application/ld+json">
@@ -107,6 +110,12 @@
   </script>
 </head>
 <body>
+  <!-- ═══════════════════════════════════════════════════════
+       THREE.JS 3D CANVAS — fullscreen background (z-index: -1)
+       Network nodes, wireframe shapes, particle field
+       ═══════════════════════════════════════════════════════ -->
+  <canvas id="threeCanvas"></canvas>
+
   <!-- Cyberpunk background elements -->
   <div class="cyber-grid"></div>
   <div class="circuit-lines" id="circuitLines"></div>
@@ -513,5 +522,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Three.js 3D background — runs after DOM ready -->
+  <script src="threejs-bg.js"></script>
 </body>
 </html>
