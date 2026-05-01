@@ -5,7 +5,7 @@
 // EmailJS Init
 (function () {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init("YOUR_PUBLIC_KEY");
+    emailjs.init("BW-BZcyECGiOQe0zP");
   }
 })();
 
@@ -163,19 +163,39 @@ function initContactForm() {
     btn.disabled = true;
 
     if (typeof emailjs !== 'undefined') {
-      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this).then(
-        () => {
+      const SERVICE_ID  = 'service_il351vr';
+      const CONTACT_TPL = 'template_t9o5rdq';   // Contact Us — goes to you
+      const REPLY_TPL   = 'template_oyp16d8';   // Auto-Reply — goes to sender
+
+      // Collect form data for auto-reply
+      const formData = {
+        from_name: form.querySelector('[name="from_name"]').value,
+        reply_to:  form.querySelector('[name="reply_to"]').value,
+        message:   form.querySelector('[name="message"]').value,
+      };
+
+      // Send Contact Us email first, then Auto-Reply
+      emailjs.sendForm(SERVICE_ID, CONTACT_TPL, this)
+        .then(() => emailjs.send(SERVICE_ID, REPLY_TPL, formData))
+        .then(() => {
           btn.textContent = '✓ SENT SUCCESSFULLY';
           btn.style.background = '#059669';
           form.reset();
-          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
-        },
-        () => {
+          setTimeout(() => {
+            btn.textContent = orig;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3500);
+        })
+        .catch(() => {
           btn.textContent = '✗ FAILED TO SEND';
           btn.style.background = '#dc2626';
-          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
-        }
-      );
+          setTimeout(() => {
+            btn.textContent = orig;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3500);
+        });
     }
   });
 }
