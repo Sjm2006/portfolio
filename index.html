@@ -173,9 +173,19 @@
           <!-- Avatar 3D Scene: no card, no frame, pure floating hologram -->
           <div class="avatar-scene" id="photoContainer">
 
+            <!-- HUD corner brackets -->
+            <div class="hud-corner hud-tl"></div>
+            <div class="hud-corner hud-tr"></div>
+            <div class="hud-corner hud-bl"></div>
+            <div class="hud-corner hud-br"></div>
+
             <!-- Orbit rings: tilt-plane perspective rings -->
             <div class="avatar-ring avatar-ring-1"></div>
             <div class="avatar-ring avatar-ring-2"></div>
+            <div class="avatar-ring avatar-ring-3"></div>
+
+            <!-- Holographic scan beam sweeping the avatar -->
+            <div class="avatar-scan-beam"></div>
 
             <!-- The avatar itself: transparent PNG, no container -->
             <img
@@ -188,6 +198,24 @@
 
             <!-- Ground glow pool under avatar feet -->
             <div class="avatar-ground-pool"></div>
+
+            <!-- Ambient particle sparks -->
+            <div class="spark spark-1"></div>
+            <div class="spark spark-2"></div>
+            <div class="spark spark-3"></div>
+            <div class="spark spark-4"></div>
+
+            <!-- Status badge — floating top center -->
+            <div class="avatar-status-badge">
+              <span class="status-ping"></span>
+              Available for Work
+            </div>
+
+            <!-- HUD data readout — bottom left -->
+            <div class="avatar-hud-data">
+              <span class="hud-line">SJM // v2.6</span>
+              <span class="hud-line hud-accent">FULL-STACK DEV</span>
+            </div>
 
             <!-- Floating skill chips -->
             <div class="float-chip chip-python"><i class="fab fa-python"></i> Python</div>

@@ -1661,18 +1661,42 @@ footer::before { display: none; }
    AVATAR 3D SCENE — holographic floating avatar, no card
    ═══════════════════════════════════════════════════════════ */
 
-/* Scene wrapper: perspective container, no background */
+/* Scene wrapper: larger, perspective container, no background */
 .avatar-scene {
   position: relative;
-  width: 340px;
-  height: 580px;
+  width: 420px;
+  height: 680px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   perspective: 1200px;
   flex-shrink: 0;
-  /* No background — transparent into Three.js canvas */
 }
+
+/* ── HUD corner brackets ── */
+.hud-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.avatar-scene:hover .hud-corner { opacity: 1; }
+
+.hud-tl { top: 12px;    left: 12px;
+  border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan);
+  box-shadow: -4px -4px 12px rgba(34,211,238,0.25); }
+.hud-tr { top: 12px;    right: 12px;
+  border-top: 2px solid var(--accent); border-right: 2px solid var(--accent);
+  box-shadow: 4px -4px 12px rgba(124,92,252,0.25); }
+.hud-bl { bottom: 12px; left: 12px;
+  border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent);
+  box-shadow: -4px 4px 12px rgba(124,92,252,0.25); }
+.hud-br { bottom: 12px; right: 12px;
+  border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan);
+  box-shadow: 4px 4px 12px rgba(34,211,238,0.25); }
 
 /* ── Tilt-plane orbit rings (perspective floor rings) ── */
 .avatar-ring {
@@ -1682,49 +1706,79 @@ footer::before { display: none; }
 }
 
 .avatar-ring-1 {
-  width: 440px;
-  height: 440px;
-  bottom: -20px;
-  left: 50%;
+  width: 520px; height: 520px;
+  bottom: -20px; left: 50%;
   transform: translateX(-50%) rotateX(78deg);
   border: 1.5px dashed rgba(124, 92, 252, 0.22);
   animation: spinCW 22s linear infinite;
 }
 
 .avatar-ring-2 {
-  width: 320px;
-  height: 320px;
-  bottom: -10px;
-  left: 50%;
+  width: 380px; height: 380px;
+  bottom: -10px; left: 50%;
   transform: translateX(-50%) rotateX(78deg);
   border: 1px dashed rgba(34, 211, 238, 0.15);
   animation: spinCCW 30s linear infinite;
 }
 
+.avatar-ring-3 {
+  width: 260px; height: 260px;
+  bottom: 0px; left: 50%;
+  transform: translateX(-50%) rotateX(78deg);
+  border: 1px solid rgba(124, 92, 252, 0.08);
+  animation: spinCW 15s linear infinite;
+}
+
+/* ── Holographic scan beam ── */
+.avatar-scan-beam {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0.0) 10%,
+    rgba(34, 211, 238, 0.6) 40%,
+    rgba(124, 92, 252, 0.8) 50%,
+    rgba(34, 211, 238, 0.6) 60%,
+    rgba(34, 211, 238, 0.0) 90%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.5), 0 0 40px rgba(124, 92, 252, 0.3);
+  z-index: 12;
+  pointer-events: none;
+  animation: scanBeam 4s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes scanBeam {
+  0%   { top: 8%;  opacity: 0; }
+  5%   { opacity: 1; }
+  92%  { opacity: 0.8; }
+  100% { top: 88%; opacity: 0; }
+}
+
 /* ── The avatar image — zero container, zero background ── */
 .avatar-3d {
-  /* Sizing: tall enough to show full body */
-  width: 300px;
+  width: 380px;
   height: auto;
-  max-height: 540px;
-  object-fit: contain;        /* never crop or distort */
+  max-height: 640px;
+  object-fit: contain;
   object-position: center bottom;
 
-  /* GPU layer: all transforms on compositor thread */
   transform-style: preserve-3d;
   will-change: transform, filter;
 
-  /* Base idle float animation */
   animation: avatarFloat 5s ease-in-out infinite;
 
-  /* Neon drop-shadow glow — purple + cyan, NO box-shadow */
   filter:
-    drop-shadow(0 0 18px rgba(124, 92, 252, 0.55))
-    drop-shadow(0 0 40px rgba(124, 92, 252, 0.25))
-    drop-shadow(0 8px 32px rgba(0, 0, 0, 0.6));
+    drop-shadow(0 0 22px rgba(124, 92, 252, 0.60))
+    drop-shadow(0 0 55px rgba(124, 92, 252, 0.28))
+    drop-shadow(0 12px 40px rgba(0, 0, 0, 0.65));
 
-  /* Smooth tilt transitions driven by JS */
-  transition: filter 0.4s ease, transform 0.1s ease-out;
+  transition: filter 0.4s ease;
 
   position: relative;
   z-index: 10;
@@ -1732,47 +1786,38 @@ footer::before { display: none; }
   display: block;
   margin: 0 auto;
 
-  /* Ensure transparent PNG background shows through */
   background: none !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
 }
 
-/* Idle float keyframe — gentle levitation */
 @keyframes avatarFloat {
-  0%, 100% {
-    transform: translateY(0px) rotateY(-4deg);
-  }
-  50% {
-    transform: translateY(-16px) rotateY(-2deg);
-  }
+  0%, 100% { transform: translateY(0px)   rotateY(-3deg); }
+  50%       { transform: translateY(-18px) rotateY(-1deg); }
 }
 
-/* Hover: boost glow + slight lift — JS overrides transform */
 .avatar-scene:hover .avatar-3d {
   filter:
-    drop-shadow(0 0 28px rgba(124, 92, 252, 0.75))
-    drop-shadow(0 0 60px rgba(34, 211, 238, 0.30))
-    drop-shadow(0 12px 48px rgba(0, 0, 0, 0.65));
-  animation-play-state: paused;  /* JS takes over on hover */
+    drop-shadow(0 0 32px rgba(124, 92, 252, 0.80))
+    drop-shadow(0 0 70px rgba(34, 211, 238, 0.35))
+    drop-shadow(0 16px 56px rgba(0, 0, 0, 0.70));
+  animation-play-state: paused;
 }
 
-/* ── Ground glow pool: soft elliptical light under feet ── */
+/* ── Ground glow pool ── */
 .avatar-ground-pool {
   position: absolute;
-  bottom: 0px;
-  left: 50%;
+  bottom: 2px; left: 50%;
   transform: translateX(-50%);
-  width: 220px;
-  height: 22px;
+  width: 280px; height: 26px;
   background: radial-gradient(
     ellipse 100% 100% at 50% 50%,
-    rgba(124, 92, 252, 0.45) 0%,
-    rgba(34, 211, 238, 0.18) 50%,
+    rgba(124, 92, 252, 0.5) 0%,
+    rgba(34, 211, 238, 0.2) 50%,
     transparent 80%
   );
-  filter: blur(6px);
+  filter: blur(7px);
   border-radius: 50%;
   pointer-events: none;
   z-index: 5;
@@ -1781,7 +1826,134 @@ footer::before { display: none; }
 
 @keyframes groundPulse {
   0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1);   }
-  50%       { opacity: 1.0; transform: translateX(-50%) scaleX(1.1); }
+  50%       { opacity: 1.0; transform: translateX(-50%) scaleX(1.12); }
+}
+
+/* ── Ambient particle sparks ── */
+.spark {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 14;
+}
+
+.spark-1 {
+  background: var(--cyan);
+  box-shadow: 0 0 8px rgba(34,211,238,0.9);
+  top: 28%; left: 8%;
+  animation: sparkFloat 6s ease-in-out infinite;
+}
+.spark-2 {
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px rgba(124,92,252,0.9);
+  top: 55%; right: 6%;
+  width: 4px; height: 4px;
+  animation: sparkFloat 8s ease-in-out infinite 1.5s;
+}
+.spark-3 {
+  background: var(--cyan-soft);
+  box-shadow: 0 0 6px rgba(34,211,238,0.7);
+  top: 72%; left: 12%;
+  width: 3px; height: 3px;
+  animation: sparkFloat 7s ease-in-out infinite 3s;
+}
+.spark-4 {
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(124,92,252,1);
+  top: 18%; right: 10%;
+  width: 4px; height: 4px;
+  animation: sparkFloat 9s ease-in-out infinite 0.8s;
+}
+
+@keyframes sparkFloat {
+  0%   { transform: translateY(0px) scale(1);   opacity: 0.4; }
+  25%  { opacity: 1; }
+  50%  { transform: translateY(-22px) scale(1.3); opacity: 0.9; }
+  75%  { opacity: 0.5; }
+  100% { transform: translateY(0px) scale(1);   opacity: 0.4; }
+}
+
+/* ── Status badge floating above avatar ── */
+.avatar-status-badge {
+  position: absolute;
+  top: 18px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  background: rgba(6, 6, 14, 0.82);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 24px;
+  color: var(--cyan-soft);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 20px rgba(34,211,238,0.12), 0 4px 24px rgba(0,0,0,0.4);
+  z-index: 22;
+  animation: badgePop 0.6s var(--ease-spring) both 0.4s;
+}
+
+@keyframes badgePop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0)      scale(1);   }
+}
+
+.status-ping {
+  position: relative;
+  width: 8px; height: 8px;
+  flex-shrink: 0;
+}
+
+.status-ping::before,
+.status-ping::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.status-ping::before {
+  background: #22d3ee;
+  box-shadow: 0 0 6px rgba(34,211,238,0.9);
+}
+
+.status-ping::after {
+  background: rgba(34,211,238,0.4);
+  animation: pingRipple 2s ease-out infinite;
+}
+
+@keyframes pingRipple {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.8); opacity: 0;   }
+}
+
+/* ── HUD data readout strip ── */
+.avatar-hud-data {
+  position: absolute;
+  bottom: 18px; left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hud-line {
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+
+.hud-line.hud-accent {
+  color: rgba(34, 211, 238, 0.6);
 }
 
 /* ── Floating skill chips ── */
@@ -1791,40 +1963,45 @@ footer::before { display: none; }
 }
 
 .avatar-scene .chip-python {
-  bottom: 220px;
-  left: -14px;
-  border-color: rgba(34, 211, 238, 0.35);
+  bottom: 260px; left: -20px;
+  border-color: rgba(34, 211, 238, 0.4);
   color: var(--cyan-soft);
   animation: floatA 5s ease-in-out infinite;
 }
 
 .avatar-scene .chip-react {
-  top: 140px;
-  right: -14px;
+  top: 160px; right: -20px;
   animation: floatB 6s ease-in-out infinite 0.5s;
 }
 
 .avatar-scene .chip-js {
-  bottom: 145px;
-  right: -14px;
-  border-color: rgba(250, 204, 21, 0.35);
+  bottom: 175px; right: -20px;
+  border-color: rgba(250, 204, 21, 0.4);
   color: #fde68a;
   animation: floatA 7s ease-in-out infinite 1s;
 }
 
 /* ── Responsive ── */
+@media (max-width: 1100px) {
+  .hero-content { gap: 40px; }
+}
+
 @media (max-width: 900px) {
-  .avatar-scene  { width: 280px; height: 480px; }
-  .avatar-3d     { width: 250px; }
-  .avatar-ring-1 { width: 360px; height: 360px; }
-  .avatar-ring-2 { width: 270px; height: 270px; }
+  .avatar-scene  { width: 320px; height: 540px; }
+  .avatar-3d     { width: 290px; }
+  .avatar-ring-1 { width: 420px; height: 420px; }
+  .avatar-ring-2 { width: 310px; height: 310px; }
+  .avatar-ring-3 { width: 210px; height: 210px; }
+  .avatar-scan-beam { width: 300px; }
 }
 
 @media (max-width: 600px) {
-  .avatar-scene  { width: 220px; height: 400px; }
-  .avatar-3d     { width: 200px; }
+  .avatar-scene  { width: 250px; height: 440px; }
+  .avatar-3d     { width: 220px; }
+  .avatar-scan-beam { width: 220px; }
   .avatar-scene .chip-python,
   .avatar-scene .chip-js { left: -8px; }
   .avatar-scene .chip-react { right: -8px; }
   .logo-avatar { width: 28px; height: 28px; }
+  .spark-1, .spark-3 { display: none; }
 }
