@@ -129,7 +129,13 @@
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo">SOUMYAJEET MONDAL<span></span></a>
+        <a href="#" class="logo">
+          <span class="logo-avatar-wrap">
+            <img src="./images/self.png" alt="Soumyajeet Mondal" class="logo-avatar" />
+            <span class="logo-avatar-ring"></span>
+          </span>
+          SOUMYAJEET MONDAL<span></span>
+        </a>
         <div class="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
@@ -164,40 +170,33 @@
           </div>
         </div>
         <div class="hero-image">
-          <div class="hero-visual-wrap" id="photoContainer">
-            <!-- Hexagon glow ring -->
-            <div class="hex-glow"></div>
-            <!-- Rotating dashed ring -->
-            <div class="spin-ring spin-ring-1"></div>
-            <div class="spin-ring spin-ring-2"></div>
-            <!-- Corner brackets -->
-            <div class="bracket bracket-tl"></div>
-            <div class="bracket bracket-tr"></div>
-            <div class="bracket bracket-bl"></div>
-            <div class="bracket bracket-br"></div>
-            <!-- Status badge -->
-            <div class="hero-status-badge">
-              <span class="status-dot"></span>
-              Available for Work
-            </div>
-            <!-- Main photo -->
-            <div class="hero-photo-frame">
-              <div class="hero-photo-inner">
-                <img src="./images/self.png" alt="Soumyajeet Mondal - Full-Stack Developer" class="hero-photo-img">
-                <div class="photo-overlay-gradient"></div>
-              </div>
-            </div>
+          <!-- Avatar 3D Scene: no card, no frame, pure floating hologram -->
+          <div class="avatar-scene" id="photoContainer">
+
+            <!-- Orbit rings: tilt-plane perspective rings -->
+            <div class="avatar-ring avatar-ring-1"></div>
+            <div class="avatar-ring avatar-ring-2"></div>
+
+            <!-- The avatar itself: transparent PNG, no container -->
+            <img
+              src="./images/self.png"
+              alt="Soumyajeet Mondal — Full-Stack Developer"
+              class="avatar-3d"
+              id="avatar3d"
+              draggable="false"
+            />
+
+            <!-- Ground glow pool under avatar feet -->
+            <div class="avatar-ground-pool"></div>
+
             <!-- Floating skill chips -->
             <div class="float-chip chip-python"><i class="fab fa-python"></i> Python</div>
             <div class="float-chip chip-react"><i class="fab fa-react"></i> React</div>
-            <div class="float-chip chip-js"><i class="fab fa-js"></i> JavaScript</div>
-            <!-- Scan line -->
-            <div class="scan-line"></div>
-            <!-- Data stream lines -->
-            <div class="data-line dl-1"></div>
-            <div class="data-line dl-2"></div>
+            <div class="float-chip chip-js"><i class="fab fa-js"></i> JS</div>
+
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -495,7 +494,7 @@
               <div class="contact-icon"><i class="fas fa-envelope"></i></div>
               <div class="contact-text">
                 <h4>EMAIL</h4>
-                <a href="mailto:soumyajitmondal511@gmail.com"><small>soumyajitmondal511@gmail.com</small></a>
+                <a href="mailto:soumyajeet2006mondal@gmail.com"><small>soumyajeet2006mondal@gmail.com</small></a>
               </div>
             </div>
             <div class="contact-item">

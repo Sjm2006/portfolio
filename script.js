@@ -36,28 +36,75 @@ function initTilt() {
   });
 }
 
-// ============ HERO PARALLAX ============
-function initHeroParallax() {
+// ============ AVATAR 3D TILT ENGINE ============
+function initAvatarTilt() {
+  // Disable heavy tilt on touch/mobile — not needed, saves perf
   if ('ontouchstart' in window) return;
-  const photo = document.getElementById('photoContainer');
-  const hero = document.querySelector('.hero');
-  if (!photo || !hero) return;
 
-  hero.addEventListener('mousemove', e => {
-    const rect = hero.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    photo.style.transform = `translate(${x * 20}px, ${y * 20}px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
-    photo.style.transition = 'transform 0.12s ease-out';
-  });
+  const avatar = document.getElementById('avatar3d');
+  const scene  = avatar && avatar.closest('.avatar-scene');
+  if (!avatar || !scene) return;
 
-  hero.addEventListener('mouseleave', () => {
-    photo.style.transform = '';
-    photo.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+  // Lerp state — smooth interpolation, zero jitter
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  let rafId = null;
+  let isHovered = false;
+
+  const MAX_TILT      = 12;  // max rotation in degrees
+  const MAX_TRANSLATE = 8;   // max position shift in px
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    currentX = lerp(currentX, targetX, 0.08);
+    currentY = lerp(currentY, targetY, 0.08);
+
+    // Single composite transform — GPU compositor only, no reflow
+    avatar.style.transform = [
+      'perspective(1000px)',
+      `rotateY(${currentX.toFixed(3)}deg)`,
+      `rotateX(${currentY.toFixed(3)}deg)`,
+      `translateX(${(currentX * MAX_TRANSLATE / MAX_TILT).toFixed(2)}px)`,
+      `translateY(${(-currentY * MAX_TRANSLATE / MAX_TILT).toFixed(2)}px)`,
+      `scale(${isHovered ? 1.03 : 1})`
+    ].join(' ');
+
+    const dist = Math.abs(currentX - targetX) + Math.abs(currentY - targetY);
+    if (isHovered || dist > 0.01) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+    }
+  }
+
+  function startTick() {
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  scene.addEventListener('mousemove', e => {
+    const rect = scene.getBoundingClientRect();
+    const nx = (e.clientX - rect.left)  / rect.width  - 0.5;
+    const ny = (e.clientY - rect.top)   / rect.height - 0.5;
+    targetX =  nx * MAX_TILT;
+    targetY = -ny * MAX_TILT;
+    startTick();
+  }, { passive: true });
+
+  scene.addEventListener('mouseenter', () => { isHovered = true;  startTick(); });
+  scene.addEventListener('mouseleave', () => {
+    isHovered = false;
+    targetX = 0;
+    targetY = 0;
+    startTick();
   });
 }
 
-// ============ SCROLL REVEAL ============
+// ============ HERO PARALLAX (replaced by avatar tilt) ============
+function initHeroParallax() { /* no-op: initAvatarTilt handles this */ }
+
+// ============ ORBIT RINGS (replaced by CSS avatar-ring) ============
+function initOrbitRings() { /* no-op: orbit rings are pure CSS now */ }
 function initReveal() {
   const els = document.querySelectorAll(
     '.about-card, .timeline-item, .tech-category, .project-card, .contact-item, .contact-form, .section-title'
@@ -116,38 +163,6 @@ function initSmoothScroll() {
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
-}
-
-// ============ ORBIT RINGS & PARTICLES ============
-function initOrbitRings() {
-  const container = document.getElementById('photoContainer');
-  if (!container) return;
-
-  [340, 360, 380].forEach((size, i) => {
-    const ring = document.createElement('div');
-    ring.className = 'orbit-ring';
-    ring.style.cssText = `
-      width: ${size}px; height: ${size}px;
-      top: ${(380 - size) / 2}px; left: ${(380 - size) / 2}px;
-      animation-duration: ${30 + i * 12}s;
-      ${i % 2 ? 'animation-direction: reverse;' : ''}
-    `;
-    container.appendChild(ring);
-  });
-
-  for (let i = 0; i < 4; i++) {
-    const p = document.createElement('div');
-    p.className = 'moving-particle';
-    p.style.cssText = `
-      top: ${Math.random() * 100}%;
-      left: ${Math.random() * 100}%;
-      --tx: ${(Math.random() - 0.5) * 180}px;
-      --ty: ${(Math.random() - 0.5) * 180}px;
-      animation-duration: ${10 + Math.random() * 10}s;
-      animation-delay: ${Math.random() * 5}s;
-    `;
-    container.appendChild(p);
-  }
 }
 
 // ============ CONTACT FORM ============
@@ -254,5 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initTilt();
   initHeroParallax();
+  initAvatarTilt();
   initMagnetic();
 });

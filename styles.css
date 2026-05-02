@@ -1610,3 +1610,221 @@ footer::before { display: none; }
   .hero-photo-inner { border-radius: 18px; }
   .float-chip { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   LOGO AVATAR — small circular photo before name in header
+   ═══════════════════════════════════════════════════════════ */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border: 2px solid rgba(124, 92, 252, 0.5);
+  box-shadow: 0 0 12px rgba(124, 92, 252, 0.3), 0 0 0 3px rgba(124, 92, 252, 0.08);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.logo:hover .logo-avatar {
+  border-color: rgba(34, 211, 238, 0.7);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.4), 0 0 0 3px rgba(34, 211, 238, 0.1);
+}
+
+.logo-avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(124, 92, 252, 0.35);
+  animation: spinCW 10s linear infinite;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO 3D SCENE — standing full-body 3D card
+   ═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   AVATAR 3D SCENE — holographic floating avatar, no card
+   ═══════════════════════════════════════════════════════════ */
+
+/* Scene wrapper: perspective container, no background */
+.avatar-scene {
+  position: relative;
+  width: 340px;
+  height: 580px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  perspective: 1200px;
+  flex-shrink: 0;
+  /* No background — transparent into Three.js canvas */
+}
+
+/* ── Tilt-plane orbit rings (perspective floor rings) ── */
+.avatar-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.avatar-ring-1 {
+  width: 440px;
+  height: 440px;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(78deg);
+  border: 1.5px dashed rgba(124, 92, 252, 0.22);
+  animation: spinCW 22s linear infinite;
+}
+
+.avatar-ring-2 {
+  width: 320px;
+  height: 320px;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(78deg);
+  border: 1px dashed rgba(34, 211, 238, 0.15);
+  animation: spinCCW 30s linear infinite;
+}
+
+/* ── The avatar image — zero container, zero background ── */
+.avatar-3d {
+  /* Sizing: tall enough to show full body */
+  width: 300px;
+  height: auto;
+  max-height: 540px;
+  object-fit: contain;        /* never crop or distort */
+  object-position: center bottom;
+
+  /* GPU layer: all transforms on compositor thread */
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+
+  /* Base idle float animation */
+  animation: avatarFloat 5s ease-in-out infinite;
+
+  /* Neon drop-shadow glow — purple + cyan, NO box-shadow */
+  filter:
+    drop-shadow(0 0 18px rgba(124, 92, 252, 0.55))
+    drop-shadow(0 0 40px rgba(124, 92, 252, 0.25))
+    drop-shadow(0 8px 32px rgba(0, 0, 0, 0.6));
+
+  /* Smooth tilt transitions driven by JS */
+  transition: filter 0.4s ease, transform 0.1s ease-out;
+
+  position: relative;
+  z-index: 10;
+  cursor: default;
+  display: block;
+  margin: 0 auto;
+
+  /* Ensure transparent PNG background shows through */
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Idle float keyframe — gentle levitation */
+@keyframes avatarFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateY(-4deg);
+  }
+  50% {
+    transform: translateY(-16px) rotateY(-2deg);
+  }
+}
+
+/* Hover: boost glow + slight lift — JS overrides transform */
+.avatar-scene:hover .avatar-3d {
+  filter:
+    drop-shadow(0 0 28px rgba(124, 92, 252, 0.75))
+    drop-shadow(0 0 60px rgba(34, 211, 238, 0.30))
+    drop-shadow(0 12px 48px rgba(0, 0, 0, 0.65));
+  animation-play-state: paused;  /* JS takes over on hover */
+}
+
+/* ── Ground glow pool: soft elliptical light under feet ── */
+.avatar-ground-pool {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 22px;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgba(124, 92, 252, 0.45) 0%,
+    rgba(34, 211, 238, 0.18) 50%,
+    transparent 80%
+  );
+  filter: blur(6px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  animation: groundPulse 5s ease-in-out infinite;
+}
+
+@keyframes groundPulse {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1);   }
+  50%       { opacity: 1.0; transform: translateX(-50%) scaleX(1.1); }
+}
+
+/* ── Floating skill chips ── */
+.avatar-scene .float-chip {
+  position: absolute;
+  z-index: 15;
+}
+
+.avatar-scene .chip-python {
+  bottom: 220px;
+  left: -14px;
+  border-color: rgba(34, 211, 238, 0.35);
+  color: var(--cyan-soft);
+  animation: floatA 5s ease-in-out infinite;
+}
+
+.avatar-scene .chip-react {
+  top: 140px;
+  right: -14px;
+  animation: floatB 6s ease-in-out infinite 0.5s;
+}
+
+.avatar-scene .chip-js {
+  bottom: 145px;
+  right: -14px;
+  border-color: rgba(250, 204, 21, 0.35);
+  color: #fde68a;
+  animation: floatA 7s ease-in-out infinite 1s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .avatar-scene  { width: 280px; height: 480px; }
+  .avatar-3d     { width: 250px; }
+  .avatar-ring-1 { width: 360px; height: 360px; }
+  .avatar-ring-2 { width: 270px; height: 270px; }
+}
+
+@media (max-width: 600px) {
+  .avatar-scene  { width: 220px; height: 400px; }
+  .avatar-3d     { width: 200px; }
+  .avatar-scene .chip-python,
+  .avatar-scene .chip-js { left: -8px; }
+  .avatar-scene .chip-react { right: -8px; }
+  .logo-avatar { width: 28px; height: 28px; }
+}
