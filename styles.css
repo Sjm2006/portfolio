@@ -1658,59 +1658,136 @@ footer::before { display: none; }
    HERO 3D SCENE — standing full-body 3D card
    ═══════════════════════════════════════════════════════════ */
 /* ═══════════════════════════════════════════════════════════
-   AVATAR 3D SCENE — next-gen holographic projection
+   AVATAR — ENERGY CORE IDENTITY
+   Completely redesigned: circular energy frame, glowing core,
+   orbiting tech rings, floating avatar, animated SVG arcs
    ═══════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────
-   SCENE WRAPPER
-   Large, perspective container — no background, no card
-───────────────────────────────────────────────────────────── */
+/* ═══ SCENE WRAPPER ══════════════════════════════════════════ */
 .avatar-scene {
   position: relative;
-  width: 460px;
-  height: 700px;
+  width: 480px;
+  height: 520px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  perspective: 1000px;
-  perspective-origin: 50% 40%;
   flex-shrink: 0;
   isolation: isolate;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   HOLOGRAM SHELL — wraps the image, applies all optical effects
-   No background. No border. Pure light.
-───────────────────────────────────────────────────────────── */
+/* ═══ ENERGY CORE — the central glowing disc behind avatar ═══ */
+.energy-core {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Layered radial glow — the "power source" */
+.energy-core::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 60%,
+    rgba(124, 92, 252, 0.22) 0%,
+    rgba(34, 211, 238, 0.10) 40%,
+    transparent 72%
+  );
+  animation: corePulse 4s ease-in-out infinite;
+}
+
+.energy-core::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(124, 92, 252, 0.15) 0%,
+    transparent 70%
+  );
+  animation: corePulse 4s ease-in-out infinite 2s;
+}
+
+@keyframes corePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1);    }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* ═══ SVG RING SYSTEM — animated arcs around the avatar ══════ */
+.avatar-svg-rings {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px; height: 420px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Outer dashed arc ring — slow rotation ── */
+.ring-outer {
+  transform-origin: center;
+  animation: spinCW 28s linear infinite;
+}
+
+/* ── Mid solid arc ring — counter rotation ── */
+.ring-mid {
+  transform-origin: center;
+  animation: spinCCW 18s linear infinite;
+}
+
+/* ── Inner tech-tick ring ── */
+.ring-inner {
+  transform-origin: center;
+  animation: spinCW 10s linear infinite;
+}
+
+/* ── Progress arc (static, decorative) ── */
+.ring-progress {
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+/* ═══ AVATAR IMAGE — floats above core ════════════════════════ */
 .holo-shell {
   position: relative;
+  z-index: 10;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  z-index: 10;
-  transform-style: preserve-3d;
   will-change: transform;
-  animation: holoFloat 6s ease-in-out infinite;
+  animation: avatarLevitate 5s ease-in-out infinite,
+             holoFlicker     8s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
-@keyframes holoFloat {
-  0%,100% { transform: translateY(0px)   rotateY(-2deg) rotateX(1deg); }
-  33%      { transform: translateY(-14px) rotateY( 1deg) rotateX(-1deg); }
-  66%      { transform: translateY(-8px)  rotateY(-1deg) rotateX(0.5deg); }
+@keyframes avatarLevitate {
+  0%,100% { transform: translateY(0px)   rotateY(-2deg); }
+  40%      { transform: translateY(-16px) rotateY( 1.5deg); }
+  70%      { transform: translateY(-9px)  rotateY(-1deg); }
 }
 
-/* ─────────────────────────────────────────────────────────────
-   THE AVATAR IMAGE
-   Transparent PNG, rendered frameless
-───────────────────────────────────────────────────────────── */
+@keyframes holoFlicker {
+  0%,100%          { opacity: 1; }
+  46%, 46.3%        { opacity: 0.85; }
+  46.4%             { opacity: 1; }
+  78%, 78.2%        { opacity: 0.80; }
+  78.3%             { opacity: 1; }
+}
+
 .avatar-3d {
-  width: 380px;
+  width: 340px;
   height: auto;
-  max-height: 640px;
+  max-height: 500px;
   object-fit: contain;
   object-position: center bottom;
   display: block;
-  cursor: default;
   user-select: none;
   -webkit-user-drag: none;
   background: none !important;
@@ -1719,360 +1796,194 @@ footer::before { display: none; }
   box-shadow: none !important;
   position: relative;
   z-index: 2;
-
-  /* Base hologram glow */
   filter:
-    drop-shadow(0 0 18px rgba(124, 92, 252, 0.55))
-    drop-shadow(0 0 48px rgba(124, 92, 252, 0.22))
-    drop-shadow(0   20px 50px rgba(0, 0, 0, 0.6));
-
+    drop-shadow(0 0 20px rgba(124, 92, 252, 0.60))
+    drop-shadow(0 0 50px rgba(124, 92, 252, 0.20))
+    drop-shadow(0 24px 48px rgba(0, 0, 0, 0.65));
   transition: filter 0.5s ease;
 }
 
-/* Glow intensifies on hover */
 .avatar-scene:hover .avatar-3d {
   filter:
-    drop-shadow(0 0 28px rgba(124, 92, 252, 0.85))
-    drop-shadow(0 0 60px rgba(34,  211, 238, 0.40))
-    drop-shadow(0 0 90px rgba(124, 92, 252, 0.18))
-    drop-shadow(0 20px 55px rgba(0, 0, 0, 0.7));
+    drop-shadow(0 0 30px rgba(124, 92, 252, 0.90))
+    drop-shadow(0 0 65px rgba(34,  211, 238, 0.38))
+    drop-shadow(0 0 100px rgba(124, 92, 252, 0.15))
+    drop-shadow(0 24px 52px rgba(0, 0, 0, 0.70));
 }
 
-/* ─────────────────────────────────────────────────────────────
-   CHROMATIC ABERRATION LAYERS
-   Two ghost copies of the image offset in R and B channels
-   Uses mix-blend-mode to create the RGB split illusion
-───────────────────────────────────────────────────────────── */
-.avatar-ca-r,
-.avatar-ca-b {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  animation: caFlicker 8s ease-in-out infinite;
-}
-
-.avatar-ca-r { animation-delay: 0s; }
-.avatar-ca-b { animation-delay: 0.15s; }
-
-.avatar-ca-r img,
-.avatar-ca-b img {
-  width: 380px;
-  height: auto;
-  max-height: 640px;
-  object-fit: contain;
-  object-position: center bottom;
-  background: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-/* Red channel — shift left, red tint */
-.avatar-ca-r {
-  transform: translateX(-3px);
-  mix-blend-mode: screen;
-}
-.avatar-ca-r img {
-  filter: drop-shadow(0 0 0 transparent);
-  opacity: 0.55;
-  mix-blend-mode: screen;
-  /* Tint red via hue-rotate approach */
-  filter: sepia(1) saturate(4) hue-rotate(300deg) brightness(0.7);
-}
-
-/* Blue channel — shift right, cyan tint */
-.avatar-ca-b {
-  transform: translateX(3px);
-  mix-blend-mode: screen;
-}
-.avatar-ca-b img {
-  opacity: 0.45;
-  mix-blend-mode: screen;
-  filter: sepia(1) saturate(4) hue-rotate(160deg) brightness(0.65);
-}
-
-@keyframes caFlicker {
-  0%,  48%        { opacity: 0; }
-  49%, 49.5%      { opacity: 0.9; }
-  50%             { opacity: 0; }
-  72%, 72.4%      { opacity: 0.7; }
-  72.5%           { opacity: 0; }
-  91%, 91.3%      { opacity: 0.8; }
-  91.4%, 100%     { opacity: 0; }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   SCANLINE OVERLAY
-   Fine horizontal lines across the whole avatar area
-───────────────────────────────────────────────────────────── */
-.holo-scanlines {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 13;
-  border-radius: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(34, 211, 238, 0.025) 2px,
-    rgba(34, 211, 238, 0.025) 4px
-  );
-  animation: scanlineShift 12s linear infinite;
-  mix-blend-mode: overlay;
-}
-
-@keyframes scanlineShift {
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 200px; }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   HOLOGRAM SCAN BEAM
-   Single bright line sweeping top → bottom
-───────────────────────────────────────────────────────────── */
-.avatar-scan-beam {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 380px;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(34, 211, 238, 0.0)  8%,
-    rgba(34, 211, 238, 0.5) 38%,
-    rgba(180,130,255, 0.9)  50%,
-    rgba(34, 211, 238, 0.5) 62%,
-    rgba(34, 211, 238, 0.0) 92%,
-    transparent 100%
-  );
-  filter: blur(0.8px);
-  box-shadow:
-    0 0 12px rgba(34, 211, 238, 0.6),
-    0 0 32px rgba(124, 92, 252, 0.4);
-  z-index: 14;
-  pointer-events: none;
-  animation: scanBeam 5s cubic-bezier(0.4,0,0.6,1) infinite;
-  opacity: 0;
-}
-
-@keyframes scanBeam {
-  0%    { top: 5%;   opacity: 0; }
-  4%    { opacity: 1; }
-  94%   { opacity: 0.7; }
-  100%  { top: 90%;  opacity: 0; }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   OPACITY FLICKER — energy pulse on the whole shell
-───────────────────────────────────────────────────────────── */
-.holo-shell {
-  animation: holoFloat 6s ease-in-out infinite,
-             holoFlicker 9s ease-in-out infinite;
-}
-
-@keyframes holoFlicker {
-  0%,  100%      { opacity: 1; }
-  47.0%, 47.2%   { opacity: 0.88; }
-  47.3%          { opacity: 1; }
-  73.0%, 73.15%  { opacity: 0.82; }
-  73.16%         { opacity: 1; }
-  89.0%, 89.08%  { opacity: 0.9; }
-  89.1%          { opacity: 1; }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   ORBIT RINGS — perspective floor rings below avatar
-───────────────────────────────────────────────────────────── */
-.avatar-ring {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.avatar-ring-1 {
-  width: 520px; height: 520px;
-  bottom: -18px; left: 50%;
-  transform: translateX(-50%) rotateX(76deg);
-  border: 1.5px dashed rgba(124, 92, 252, 0.20);
-  animation: spinCW 24s linear infinite;
-}
-
-.avatar-ring-2 {
-  width: 370px; height: 370px;
-  bottom: -8px; left: 50%;
-  transform: translateX(-50%) rotateX(76deg);
-  border: 1px dashed rgba(34, 211, 238, 0.14);
-  animation: spinCCW 34s linear infinite;
-}
-
-.avatar-ring-3 {
-  width: 240px; height: 240px;
-  bottom: 2px; left: 50%;
-  transform: translateX(-50%) rotateX(76deg);
-  border: 1px solid rgba(124, 92, 252, 0.07);
-  animation: spinCW 17s linear infinite;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   GROUND GLOW POOL
-───────────────────────────────────────────────────────────── */
+/* ═══ GROUND REFLECTION ════════════════════════════════════════ */
 .avatar-ground-pool {
   position: absolute;
-  bottom: 0px; left: 50%;
+  bottom: 10px; left: 50%;
   transform: translateX(-50%);
-  width: 300px; height: 28px;
+  width: 260px; height: 22px;
   background: radial-gradient(
     ellipse 100% 100% at 50% 50%,
     rgba(124, 92, 252, 0.55) 0%,
-    rgba(34, 211, 238, 0.22) 50%,
+    rgba(34, 211, 238, 0.20) 55%,
     transparent 80%
   );
   filter: blur(8px);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 5;
-  animation: groundPulse 6s ease-in-out infinite;
+  z-index: 4;
+  animation: groundPulse 5s ease-in-out infinite;
 }
 
 @keyframes groundPulse {
-  0%, 100% { opacity: 0.65; transform: translateX(-50%) scaleX(1); }
-  50%       { opacity: 1;    transform: translateX(-50%) scaleX(1.15); }
+  0%,100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+  50%      { opacity: 1;   transform: translateX(-50%) scaleX(1.18); }
 }
 
-/* ─────────────────────────────────────────────────────────────
-   HUD CORNERS
-───────────────────────────────────────────────────────────── */
-.hud-corner {
+/* ═══ SCAN BEAM — sweeps through the avatar ════════════════════ */
+.avatar-scan-beam {
   position: absolute;
-  width: 24px; height: 24px;
-  z-index: 20;
+  left: 50%; transform: translateX(-50%);
+  width: 340px; height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0) 6%,
+    rgba(34, 211, 238, 0.55) 38%,
+    rgba(180, 130, 255, 0.95) 50%,
+    rgba(34, 211, 238, 0.55) 62%,
+    rgba(34, 211, 238, 0) 94%,
+    transparent 100%
+  );
+  filter: blur(0.8px);
+  box-shadow: 0 0 14px rgba(34,211,238,0.6), 0 0 32px rgba(124,92,252,0.4);
+  z-index: 12; pointer-events: none; opacity: 0;
+  animation: scanBeam 5s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+
+@keyframes scanBeam {
+  0%   { top: 5%;  opacity: 0; }
+  4%   { opacity: 1; }
+  93%  { opacity: 0.7; }
+  100% { top: 92%; opacity: 0; }
+}
+
+/* ═══ FLOATING STAT NODES — replace plain chips ════════════════
+   3 small circular stat nodes orbit the avatar visually,
+   positioned top-right, mid-left, bottom-right
+════════════════════════════════════════════════════════════════ */
+.stat-node {
+  position: absolute;
+  z-index: 18;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   pointer-events: none;
-  opacity: 0.5;
-  transition: opacity 0.4s ease, box-shadow 0.4s ease;
-}
-.avatar-scene:hover .hud-corner { opacity: 1; }
-
-.hud-tl {
-  top: 10px; left: 10px;
-  border-top: 1.5px solid var(--cyan);
-  border-left: 1.5px solid var(--cyan);
-  box-shadow: -3px -3px 10px rgba(34,211,238,0.3);
-}
-.hud-tr {
-  top: 10px; right: 10px;
-  border-top: 1.5px solid var(--accent);
-  border-right: 1.5px solid var(--accent);
-  box-shadow: 3px -3px 10px rgba(124,92,252,0.3);
-}
-.hud-bl {
-  bottom: 10px; left: 10px;
-  border-bottom: 1.5px solid var(--accent);
-  border-left: 1.5px solid var(--accent);
-  box-shadow: -3px 3px 10px rgba(124,92,252,0.3);
-}
-.hud-br {
-  bottom: 10px; right: 10px;
-  border-bottom: 1.5px solid var(--cyan);
-  border-right: 1.5px solid var(--cyan);
-  box-shadow: 3px 3px 10px rgba(34,211,238,0.3);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   AMBIENT SPARKS
-───────────────────────────────────────────────────────────── */
-.spark {
-  position: absolute;
+.stat-node-circle {
+  width: 48px; height: 48px;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 14;
-}
-.spark-1 {
-  width: 5px; height: 5px;
-  background: var(--cyan);
-  box-shadow: 0 0 8px rgba(34,211,238,0.9);
-  top: 28%; left: 6%;
-  animation: sparkFloat 6s ease-in-out infinite;
-}
-.spark-2 {
-  width: 4px; height: 4px;
-  background: var(--accent-bright);
-  box-shadow: 0 0 8px rgba(124,92,252,0.9);
-  top: 52%; right: 5%;
-  animation: sparkFloat 8s ease-in-out infinite 1.5s;
-}
-.spark-3 {
-  width: 3px; height: 3px;
-  background: var(--cyan-soft);
-  box-shadow: 0 0 6px rgba(34,211,238,0.7);
-  top: 70%; left: 10%;
-  animation: sparkFloat 7s ease-in-out infinite 3s;
-}
-.spark-4 {
-  width: 4px; height: 4px;
-  background: var(--accent);
-  box-shadow: 0 0 10px rgba(124,92,252,1);
-  top: 16%; right: 8%;
-  animation: sparkFloat 9s ease-in-out infinite 0.8s;
-}
-@keyframes sparkFloat {
-  0%        { transform: translateY(0px)    scale(1);   opacity: 0.35; }
-  25%        { opacity: 1; }
-  50%        { transform: translateY(-24px) scale(1.35); opacity: 0.85; }
-  75%        { opacity: 0.5; }
-  100%       { transform: translateY(0px)   scale(1);   opacity: 0.35; }
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background: rgba(6, 6, 14, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 16px rgba(34, 211, 238, 0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: transform 0.3s ease;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   STATUS BADGE
-───────────────────────────────────────────────────────────── */
+.stat-node-circle i {
+  font-size: 1rem;
+  color: var(--cyan-soft);
+}
+
+.stat-node-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  font-family: 'Courier New', monospace;
+}
+
+/* Node positions */
+.node-python {
+  top: 80px; right: 18px;
+  animation: nodeFloat 5s ease-in-out infinite;
+}
+.node-python .stat-node-circle {
+  border-color: rgba(34,211,238,0.4);
+  box-shadow: 0 0 18px rgba(34,211,238,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.node-python i { color: var(--cyan-soft); }
+
+.node-react {
+  top: 50%; left: 14px;
+  transform: translateY(-50%);
+  animation: nodeFloat 6s ease-in-out infinite 1s;
+}
+.node-react .stat-node-circle {
+  border-color: rgba(124,92,252,0.4);
+  box-shadow: 0 0 18px rgba(124,92,252,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.node-react i { color: var(--accent-soft); }
+
+.node-js {
+  bottom: 100px; right: 22px;
+  animation: nodeFloat 7s ease-in-out infinite 0.5s;
+}
+.node-js .stat-node-circle {
+  border-color: rgba(250,204,21,0.35);
+  box-shadow: 0 0 18px rgba(250,204,21,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.node-js i { color: #fde68a; }
+
+@keyframes nodeFloat {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+.node-react { animation: nodeFloatMid 6s ease-in-out infinite 1s; }
+@keyframes nodeFloatMid {
+  0%,100% { transform: translateY(-50%) translateX(0px); }
+  50%      { transform: translateY(-50%) translateX(-8px); }
+}
+
+/* ═══ STATUS BADGE ══════════════════════════════════════════════ */
 .avatar-status-badge {
   position: absolute;
-  top: 16px; left: 50%;
+  top: 14px; left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 5px 15px;
-  background: rgba(6, 6, 14, 0.80);
-  border: 1px solid rgba(34, 211, 238, 0.32);
+  padding: 5px 16px;
+  background: rgba(6, 6, 14, 0.82);
+  border: 1px solid rgba(34, 211, 238, 0.30);
   border-radius: 24px;
   color: var(--cyan-soft);
-  font-size: 0.68rem;
+  font-size: 0.67rem;
   font-weight: 600;
-  letter-spacing: 0.9px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   white-space: nowrap;
   backdrop-filter: blur(16px);
-  box-shadow:
-    0 0 18px rgba(34,211,238,0.10),
-    0 4px 22px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 0 20px rgba(34,211,238,0.10), 0 4px 20px rgba(0,0,0,0.4),
+              inset 0 1px 0 rgba(255,255,255,0.05);
   z-index: 22;
-  animation: badgePop 0.7s var(--ease-spring) both 0.5s;
+  animation: badgePop 0.7s var(--ease-spring) both 0.6s;
 }
 
 @keyframes badgePop {
   from { opacity: 0; transform: translateX(-50%) translateY(-12px) scale(0.88); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0)      scale(1);   }
 }
 
 .status-ping {
   position: relative;
-  width: 7px; height: 7px;
-  flex-shrink: 0;
+  width: 7px; height: 7px; flex-shrink: 0;
 }
-.status-ping::before,
-.status-ping::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
+.status-ping::before, .status-ping::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
 }
 .status-ping::before {
   background: #22d3ee;
@@ -2083,88 +1994,103 @@ footer::before { display: none; }
   animation: pingRipple 2s ease-out infinite;
 }
 @keyframes pingRipple {
-  0%   { transform: scale(1);   opacity: 0.8; }
-  100% { transform: scale(3);   opacity: 0; }
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
 }
 
-/* ─────────────────────────────────────────────────────────────
-   HUD DATA STRIP
-───────────────────────────────────────────────────────────── */
+/* ═══ BOTTOM HUD BAR ════════════════════════════════════════════ */
 .avatar-hud-data {
   position: absolute;
-  bottom: 16px; left: 16px;
+  bottom: 12px; left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 14px;
   z-index: 20;
   pointer-events: none;
+  background: rgba(6,6,14,0.70);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 5px 14px;
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
 }
+
 .hud-line {
   font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  color: rgba(255,255,255,0.25);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: rgba(255,255,255,0.22);
   text-transform: uppercase;
 }
-.hud-line.hud-accent {
-  color: rgba(34, 211, 238, 0.55);
+.hud-line.hud-accent { color: rgba(34, 211, 238, 0.60); }
+
+.hud-divider {
+  width: 1px; height: 12px;
+  background: rgba(255,255,255,0.08);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   FLOATING SKILL CHIPS
-───────────────────────────────────────────────────────────── */
-.avatar-scene .float-chip {
+/* ═══ AMBIENT SPARKS ════════════════════════════════════════════ */
+.spark {
   position: absolute;
-  z-index: 15;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 14;
 }
-.avatar-scene .chip-python {
-  bottom: 265px; left: -22px;
-  border-color: rgba(34, 211, 238, 0.4);
-  color: var(--cyan-soft);
-  animation: floatA 5s ease-in-out infinite;
+.spark-1 {
+  width: 4px; height: 4px; background: var(--cyan);
+  box-shadow: 0 0 7px rgba(34,211,238,0.9);
+  top: 22%; left: 12%;
+  animation: sparkFloat 6s ease-in-out infinite;
 }
-.avatar-scene .chip-react {
-  top: 155px; right: -22px;
-  animation: floatB 6s ease-in-out infinite 0.5s;
+.spark-2 {
+  width: 3px; height: 3px; background: var(--accent-bright);
+  box-shadow: 0 0 7px rgba(124,92,252,0.9);
+  top: 55%; right: 10%;
+  animation: sparkFloat 8s ease-in-out infinite 1.5s;
 }
-.avatar-scene .chip-js {
-  bottom: 175px; right: -22px;
-  border-color: rgba(250, 204, 21, 0.4);
-  color: #fde68a;
-  animation: floatA 7s ease-in-out infinite 1s;
+.spark-3 {
+  width: 2px; height: 2px; background: var(--cyan-soft);
+  box-shadow: 0 0 5px rgba(34,211,238,0.7);
+  top: 75%; left: 18%;
+  animation: sparkFloat 7s ease-in-out infinite 3s;
+}
+.spark-4 {
+  width: 3px; height: 3px; background: var(--accent);
+  box-shadow: 0 0 8px rgba(124,92,252,1);
+  top: 14%; right: 15%;
+  animation: sparkFloat 9s ease-in-out infinite 0.8s;
+}
+@keyframes sparkFloat {
+  0%,100% { transform: translateY(0)     scale(1);    opacity: 0.3; }
+  30%      { opacity: 1; }
+  50%      { transform: translateY(-22px) scale(1.4); opacity: 0.8; }
+  70%      { opacity: 0.4; }
 }
 
-/* ─────────────────────────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────────────────────────── */
+/* ═══ RESPONSIVE ════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
-  .hero-content { gap: 40px; }
+  .hero-content { gap: 30px; }
 }
 
 @media (max-width: 900px) {
-  .avatar-scene     { width: 320px; height: 540px; }
-  .avatar-3d        { width: 290px; }
-  .avatar-ca-r img,
-  .avatar-ca-b img  { width: 290px; }
-  .avatar-ring-1    { width: 420px; height: 420px; }
-  .avatar-ring-2    { width: 310px; height: 310px; }
-  .avatar-ring-3    { width: 210px; height: 210px; }
-  .avatar-scan-beam { width: 290px; }
+  .avatar-scene      { width: 360px; height: 400px; }
+  .avatar-3d         { width: 260px; }
+  .avatar-svg-rings  { width: 320px; height: 320px; }
+  .energy-core       { width: 260px; height: 260px; }
+  .avatar-scan-beam  { width: 260px; }
+  .node-python       { right: 8px; top: 60px; }
+  .node-js           { right: 8px; }
 }
 
 @media (max-width: 600px) {
-  .avatar-scene     { width: 250px; height: 440px; }
-  .avatar-3d        { width: 220px; }
-  .avatar-ca-r img,
-  .avatar-ca-b img  { width: 220px; }
-  .avatar-scan-beam { width: 220px; }
-  .avatar-scene .chip-python,
-  .avatar-scene .chip-js  { left: -8px; }
-  .avatar-scene .chip-react { right: -8px; }
-  /* Disable heavy effects on mobile for 60fps */
-  .avatar-ca-r, .avatar-ca-b { display: none; }
-  .holo-scanlines { display: none; }
+  .avatar-scene      { width: 280px; height: 340px; }
+  .avatar-3d         { width: 210px; }
+  .avatar-svg-rings  { width: 260px; height: 260px; }
+  .energy-core       { width: 210px; height: 210px; }
+  .avatar-scan-beam  { width: 210px; }
+  .stat-node         { display: none; }
   .spark-1, .spark-3 { display: none; }
-  .logo-avatar { width: 28px; height: 28px; }
+  .logo-avatar       { width: 28px; height: 28px; }
 }

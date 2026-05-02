@@ -170,42 +170,117 @@
           </div>
         </div>
         <div class="hero-image">
-          <!-- ═══════════════════════════════════════════════
-               HOLOGRAPHIC AVATAR SCENE
-               No card. No frame. Pure floating projection.
-          ═══════════════════════════════════════════════ -->
+          <!-- ═══════════════════════════════════════════════════
+               ENERGY CORE IDENTITY — avatar hero redesign
+               Circular SVG ring system + floating PNG avatar
+               No card. No frame. Pure energy projection.
+          ════════════════════════════════════════════════════ -->
           <div class="avatar-scene" id="photoContainer">
 
-            <!-- HUD corner brackets -->
-            <div class="hud-corner hud-tl"></div>
-            <div class="hud-corner hud-tr"></div>
-            <div class="hud-corner hud-bl"></div>
-            <div class="hud-corner hud-br"></div>
+            <!-- ── Status badge ── -->
+            <div class="avatar-status-badge">
+              <span class="status-ping"></span>
+              Available for Work
+            </div>
 
-            <!-- Floor orbit rings -->
-            <div class="avatar-ring avatar-ring-1"></div>
-            <div class="avatar-ring avatar-ring-2"></div>
-            <div class="avatar-ring avatar-ring-3"></div>
+            <!-- ── Central energy glow core ── -->
+            <div class="energy-core"></div>
 
-            <!-- Ground glow pool -->
-            <div class="avatar-ground-pool"></div>
+            <!-- ── Animated SVG ring system ── -->
+            <svg class="avatar-svg-rings" viewBox="0 0 420 420" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 
-            <!-- ─── HOLOGRAM SHELL ──────────────────────
-                 Contains: the avatar + CA layers + scanlines
-            ──────────────────────────────────────────── -->
+              <!-- OUTER: dashed slow-spin ring -->
+              <g class="ring-outer">
+                <circle cx="210" cy="210" r="198"
+                  stroke="rgba(124,92,252,0.18)" stroke-width="1"
+                  stroke-dasharray="8 6"/>
+                <!-- 8 small tick marks on outer ring -->
+                <circle cx="210" cy="13"  r="3" fill="rgba(124,92,252,0.5)"/>
+                <circle cx="210" cy="407" r="3" fill="rgba(124,92,252,0.5)"/>
+                <circle cx="13"  cy="210" r="3" fill="rgba(34,211,238,0.5)"/>
+                <circle cx="407" cy="210" r="3" fill="rgba(34,211,238,0.5)"/>
+                <circle cx="70"  cy="70"  r="2" fill="rgba(124,92,252,0.3)"/>
+                <circle cx="350" cy="70"  r="2" fill="rgba(124,92,252,0.3)"/>
+                <circle cx="70"  cy="350" r="2" fill="rgba(34,211,238,0.3)"/>
+                <circle cx="350" cy="350" r="2" fill="rgba(34,211,238,0.3)"/>
+              </g>
+
+              <!-- MID: solid arcs — counter spin -->
+              <g class="ring-mid">
+                <!-- Top arc: purple -->
+                <path d="M 210 62 A 148 148 0 0 1 358 210"
+                  stroke="rgba(124,92,252,0.45)" stroke-width="1.5"
+                  stroke-linecap="round"/>
+                <!-- Bottom arc: cyan -->
+                <path d="M 62 210 A 148 148 0 0 1 210 358"
+                  stroke="rgba(34,211,238,0.45)" stroke-width="1.5"
+                  stroke-linecap="round"/>
+                <!-- Endpoint dots -->
+                <circle cx="210" cy="62"  r="4" fill="rgba(124,92,252,0.8)"
+                  filter="url(#glowPurple)"/>
+                <circle cx="358" cy="210" r="4" fill="rgba(124,92,252,0.7)"
+                  filter="url(#glowPurple)"/>
+                <circle cx="62"  cy="210" r="4" fill="rgba(34,211,238,0.8)"
+                  filter="url(#glowCyan)"/>
+                <circle cx="210" cy="358" r="4" fill="rgba(34,211,238,0.7)"
+                  filter="url(#glowCyan)"/>
+              </g>
+
+              <!-- INNER: tick ring — fast spin -->
+              <g class="ring-inner">
+                <circle cx="210" cy="210" r="108"
+                  stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <!-- 12 tick marks -->
+                <line x1="210" y1="103" x2="210" y2="112"
+                  stroke="rgba(34,211,238,0.5)" stroke-width="1.5"/>
+                <line x1="210" y1="308" x2="210" y2="317"
+                  stroke="rgba(34,211,238,0.5)" stroke-width="1.5"/>
+                <line x1="103" y1="210" x2="112" y2="210"
+                  stroke="rgba(124,92,252,0.5)" stroke-width="1.5"/>
+                <line x1="308" y1="210" x2="317" y2="210"
+                  stroke="rgba(124,92,252,0.5)" stroke-width="1.5"/>
+                <line x1="133" y1="133" x2="140" y2="140"
+                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <line x1="287" y1="133" x2="280" y2="140"
+                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <line x1="133" y1="287" x2="140" y2="280"
+                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <line x1="287" y1="287" x2="280" y2="280"
+                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              </g>
+
+              <!-- PROGRESS ARC: static cyan arc top-left showing ~75% -->
+              <g class="ring-progress">
+                <circle cx="210" cy="210" r="178"
+                  stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+                <circle cx="210" cy="210" r="178"
+                  stroke="url(#progressGrad)" stroke-width="2.5"
+                  stroke-dasharray="840 1120"
+                  stroke-linecap="round"/>
+              </g>
+
+              <!-- DEFS: gradients + glow filters -->
+              <defs>
+                <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"   stop-color="#7c5cfc" stop-opacity="0"/>
+                  <stop offset="30%"  stop-color="#7c5cfc" stop-opacity="0.9"/>
+                  <stop offset="70%"  stop-color="#22d3ee" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="glowPurple" x="-150%" y="-150%" width="400%" height="400%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="glowCyan" x="-150%" y="-150%" width="400%" height="400%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+            </svg>
+
+            <!-- ── Hologram shell: floating avatar ── -->
             <div class="holo-shell" id="holoShell">
-
-              <!-- Chromatic aberration — Red channel -->
-              <div class="avatar-ca-r" aria-hidden="true">
-                <img src="./images/self.png" alt="" draggable="false">
-              </div>
-
-              <!-- Chromatic aberration — Blue channel -->
-              <div class="avatar-ca-b" aria-hidden="true">
-                <img src="./images/self.png" alt="" draggable="false">
-              </div>
-
-              <!-- THE AVATAR — transparent PNG, frameless -->
               <img
                 src="./images/self.png"
                 alt="Soumyajeet Mondal — Full-Stack Developer"
@@ -213,43 +288,48 @@
                 id="avatar3d"
                 draggable="false"
               />
-
-              <!-- Fine scanline grid over avatar -->
-              <div class="holo-scanlines" aria-hidden="true"></div>
-
             </div>
-            <!-- /holo-shell -->
 
-            <!-- Sweeping scan beam -->
+            <!-- ── Scan beam ── -->
             <div class="avatar-scan-beam" aria-hidden="true"></div>
 
-            <!-- Ambient particle sparks -->
+            <!-- ── Ground glow ── -->
+            <div class="avatar-ground-pool"></div>
+
+            <!-- ── Circular stat nodes ── -->
+            <div class="stat-node node-python">
+              <div class="stat-node-circle"><i class="fab fa-python"></i></div>
+              <span class="stat-node-label">Python</span>
+            </div>
+            <div class="stat-node node-react">
+              <div class="stat-node-circle"><i class="fab fa-react"></i></div>
+              <span class="stat-node-label">React</span>
+            </div>
+            <div class="stat-node node-js">
+              <div class="stat-node-circle"><i class="fab fa-js"></i></div>
+              <span class="stat-node-label">JS</span>
+            </div>
+
+            <!-- ── Ambient sparks ── -->
             <div class="spark spark-1"></div>
             <div class="spark spark-2"></div>
             <div class="spark spark-3"></div>
             <div class="spark spark-4"></div>
 
-            <!-- Status badge -->
-            <div class="avatar-status-badge">
-              <span class="status-ping"></span>
-              Available for Work
-            </div>
-
-            <!-- HUD data readout -->
+            <!-- ── Bottom HUD bar ── -->
             <div class="avatar-hud-data">
-              <span class="hud-line">SJM // v2.6</span>
-              <span class="hud-line hud-accent">FULL-STACK DEV</span>
+              <span class="hud-line hud-accent">SJM · v2.6</span>
+              <div class="hud-divider"></div>
+              <span class="hud-line">Full-Stack Dev</span>
+              <div class="hud-divider"></div>
+              <span class="hud-line">KOL · IN</span>
             </div>
-
-            <!-- Floating skill chips -->
-            <div class="float-chip chip-python"><i class="fab fa-python"></i> Python</div>
-            <div class="float-chip chip-react"><i class="fab fa-react"></i> React</div>
-            <div class="float-chip chip-js"><i class="fab fa-js"></i> JS</div>
 
           </div>
         </div>
 
       </div>
+    </div>iv>
     </div>
   </section>
 
@@ -602,66 +682,36 @@
   <script src="script.js"></script>
   <!-- Three.js 3D background — runs after DOM ready -->
   <script src="threejs-bg.js"></script>
-<!-- Hologram avatar interaction: mouse tilt + lerp -->
 <script>
+/* ── Holographic mouse tilt — smooth lerp ── */
 (function () {
-  'use strict';
-
   const scene  = document.getElementById('photoContainer');
   const shell  = document.getElementById('holoShell');
-  const avatar = document.getElementById('avatar3d');
-  if (!scene || !shell || !avatar) return;
+  if (!scene || !shell || 'ontouchstart' in window) return;
 
-  // ── Skip heavy tilt on touch devices ──
-  const isTouch = 'ontouchstart' in window;
-  if (isTouch) return;
-
-  // Current / target tilt values
-  let tX = 0, tY = 0;   // target
-  let cX = 0, cY = 0;   // current (lerped)
-  let raf = null;
-  let inside = false;
-
-  const MAX_TILT = 10;   // degrees
-  const LERP     = 0.08; // smoothness (lower = smoother)
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
+  let tX=0,tY=0,cX=0,cY=0, raf=null, inside=false;
+  const MAX=9, L=0.07;
+  const lerp=(a,b,t)=>a+(b-a)*t;
 
   function tick() {
-    cX = lerp(cX, tX, LERP);
-    cY = lerp(cY, tY, LERP);
-
-    // Apply tilt to shell (preserves float animation on avatar-3d)
-    shell.style.transform =
-      `rotateY(${cX}deg) rotateX(${cY}deg)`;
-
-    // Stop loop when close enough and mouse is outside
-    if (!inside && Math.abs(cX) < 0.05 && Math.abs(cY) < 0.05) {
-      shell.style.transform = '';
-      raf = null;
-      return;
+    cX=lerp(cX,tX,L); cY=lerp(cY,tY,L);
+    shell.style.transform=`rotateY(${cX}deg) rotateX(${cY}deg)`;
+    if(!inside && Math.abs(cX)<0.04 && Math.abs(cY)<0.04){
+      shell.style.transform=''; raf=null; return;
     }
-
-    raf = requestAnimationFrame(tick);
+    raf=requestAnimationFrame(tick);
   }
 
-  scene.addEventListener('mousemove', e => {
-    const rect = scene.getBoundingClientRect();
-    const x = (e.clientX - rect.left)  / rect.width  - 0.5;   // -0.5 → +0.5
-    const y = (e.clientY - rect.top)   / rect.height - 0.5;
-
-    tX =  x * MAX_TILT * 2;
-    tY = -y * MAX_TILT;
-
-    if (!raf) { inside = true; raf = requestAnimationFrame(tick); }
+  scene.addEventListener('mousemove',e=>{
+    const r=scene.getBoundingClientRect();
+    tX= ((e.clientX-r.left)/r.width  - 0.5)*MAX*2;
+    tY=-((e.clientY-r.top) /r.height - 0.5)*MAX;
+    if(!raf){inside=true; raf=requestAnimationFrame(tick);}
   });
-
-  scene.addEventListener('mouseenter', () => { inside = true; });
-
-  scene.addEventListener('mouseleave', () => {
-    inside = false;
-    tX = 0; tY = 0;
-    if (!raf) raf = requestAnimationFrame(tick);
+  scene.addEventListener('mouseenter',()=>{ inside=true; });
+  scene.addEventListener('mouseleave',()=>{
+    inside=false; tX=0; tY=0;
+    if(!raf) raf=requestAnimationFrame(tick);
   });
 })();
 </script>
