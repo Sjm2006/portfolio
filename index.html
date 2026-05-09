@@ -174,158 +174,90 @@
         </div>
         <div class="hero-image">
           <!-- ═══════════════════════════════════════════════════
-               ENERGY CORE IDENTITY — avatar hero redesign
-               Circular SVG ring system + floating PNG avatar
-               No card. No frame. Pure energy projection.
+               PREMIUM PORTRAIT CARD — Professional Hero Image
+               Glassmorphism frame · Elegant rings · Skill chips
           ════════════════════════════════════════════════════ -->
-          <div class="avatar-scene" id="photoContainer">
+          <div class="portrait-scene" id="photoContainer">
+
+            <!-- ── Ambient background glow ── -->
+            <div class="portrait-glow-bg"></div>
+
+            <!-- ── Decorative corner brackets ── -->
+            <div class="corner-bracket corner-tl"></div>
+            <div class="corner-bracket corner-tr"></div>
+            <div class="corner-bracket corner-bl"></div>
+            <div class="corner-bracket corner-br"></div>
+
+            <!-- ── Rotating outer ring ── -->
+            <svg class="portrait-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#7c5cfc" stop-opacity="0.0"/>
+                  <stop offset="35%" stop-color="#7c5cfc" stop-opacity="0.7"/>
+                  <stop offset="65%" stop-color="#22d3ee" stop-opacity="0.7"/>
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.0"/>
+                </linearGradient>
+                <linearGradient id="ringGrad2" x1="100%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#7c5cfc" stop-opacity="0.0"/>
+                  <stop offset="40%" stop-color="#7c5cfc" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <!-- Outer dashed orbit -->
+              <circle cx="220" cy="220" r="208" stroke="rgba(124,92,252,0.10)" stroke-width="1" stroke-dasharray="5 8"/>
+              <!-- Main gradient arc -->
+              <circle cx="220" cy="220" r="196" stroke="url(#ringGrad1)" stroke-width="1.5" stroke-dasharray="520 730" stroke-linecap="round" class="portrait-arc-spin"/>
+              <!-- Counter arc -->
+              <circle cx="220" cy="220" r="196" stroke="url(#ringGrad2)" stroke-width="1" stroke-dasharray="200 1050" stroke-linecap="round" class="portrait-arc-counter"/>
+              <!-- Inner ring -->
+              <circle cx="220" cy="220" r="172" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <!-- Cardinal dots -->
+              <circle cx="220" cy="24"  r="2.5" fill="#7c5cfc" opacity="0.7"/>
+              <circle cx="416" cy="220" r="2.5" fill="#22d3ee" opacity="0.7"/>
+              <circle cx="220" cy="416" r="2.5" fill="#7c5cfc" opacity="0.5"/>
+              <circle cx="24"  cy="220" r="2.5" fill="#22d3ee" opacity="0.5"/>
+            </svg>
+
+            <!-- ── Main portrait frame ── -->
+            <div class="portrait-frame">
+              <div class="portrait-frame-inner">
+                <img
+                  src="./images/self.png"
+                  alt="Soumyajeet Mondal — Full-Stack Developer"
+                  class="portrait-img"
+                  draggable="false"
+                />
+                <!-- Gradient overlay at bottom -->
+                <div class="portrait-img-overlay"></div>
+                <!-- Scan line effect -->
+                <div class="portrait-scan" aria-hidden="true"></div>
+              </div>
+            </div>
 
             <!-- ── Status badge ── -->
-            <div class="avatar-status-badge">
-              <span class="status-ping"></span>
+            <div class="portrait-status-badge">
+              <span class="portrait-ping"></span>
               Available for Work
             </div>
 
-            <!-- ── Central energy glow core ── -->
-            <div class="energy-core"></div>
-
-            <!-- ── Animated SVG ring system ── -->
-            <svg class="avatar-svg-rings" viewBox="0 0 420 420" fill="none"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-
-              <!-- OUTER: dashed slow-spin ring -->
-              <g class="ring-outer">
-                <circle cx="210" cy="210" r="198"
-                  stroke="rgba(124,92,252,0.18)" stroke-width="1"
-                  stroke-dasharray="8 6"/>
-                <!-- 8 small tick marks on outer ring -->
-                <circle cx="210" cy="13"  r="3" fill="rgba(124,92,252,0.5)"/>
-                <circle cx="210" cy="407" r="3" fill="rgba(124,92,252,0.5)"/>
-                <circle cx="13"  cy="210" r="3" fill="rgba(34,211,238,0.5)"/>
-                <circle cx="407" cy="210" r="3" fill="rgba(34,211,238,0.5)"/>
-                <circle cx="70"  cy="70"  r="2" fill="rgba(124,92,252,0.3)"/>
-                <circle cx="350" cy="70"  r="2" fill="rgba(124,92,252,0.3)"/>
-                <circle cx="70"  cy="350" r="2" fill="rgba(34,211,238,0.3)"/>
-                <circle cx="350" cy="350" r="2" fill="rgba(34,211,238,0.3)"/>
-              </g>
-
-              <!-- MID: solid arcs — counter spin -->
-              <g class="ring-mid">
-                <!-- Top arc: purple -->
-                <path d="M 210 62 A 148 148 0 0 1 358 210"
-                  stroke="rgba(124,92,252,0.45)" stroke-width="1.5"
-                  stroke-linecap="round"/>
-                <!-- Bottom arc: cyan -->
-                <path d="M 62 210 A 148 148 0 0 1 210 358"
-                  stroke="rgba(34,211,238,0.45)" stroke-width="1.5"
-                  stroke-linecap="round"/>
-                <!-- Endpoint dots -->
-                <circle cx="210" cy="62"  r="4" fill="rgba(124,92,252,0.8)"
-                  filter="url(#glowPurple)"/>
-                <circle cx="358" cy="210" r="4" fill="rgba(124,92,252,0.7)"
-                  filter="url(#glowPurple)"/>
-                <circle cx="62"  cy="210" r="4" fill="rgba(34,211,238,0.8)"
-                  filter="url(#glowCyan)"/>
-                <circle cx="210" cy="358" r="4" fill="rgba(34,211,238,0.7)"
-                  filter="url(#glowCyan)"/>
-              </g>
-
-              <!-- INNER: tick ring — fast spin -->
-              <g class="ring-inner">
-                <circle cx="210" cy="210" r="108"
-                  stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                <!-- 12 tick marks -->
-                <line x1="210" y1="103" x2="210" y2="112"
-                  stroke="rgba(34,211,238,0.5)" stroke-width="1.5"/>
-                <line x1="210" y1="308" x2="210" y2="317"
-                  stroke="rgba(34,211,238,0.5)" stroke-width="1.5"/>
-                <line x1="103" y1="210" x2="112" y2="210"
-                  stroke="rgba(124,92,252,0.5)" stroke-width="1.5"/>
-                <line x1="308" y1="210" x2="317" y2="210"
-                  stroke="rgba(124,92,252,0.5)" stroke-width="1.5"/>
-                <line x1="133" y1="133" x2="140" y2="140"
-                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                <line x1="287" y1="133" x2="280" y2="140"
-                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                <line x1="133" y1="287" x2="140" y2="280"
-                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                <line x1="287" y1="287" x2="280" y2="280"
-                  stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-              </g>
-
-              <!-- PROGRESS ARC: static cyan arc top-left showing ~75% -->
-              <g class="ring-progress">
-                <circle cx="210" cy="210" r="178"
-                  stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
-                <circle cx="210" cy="210" r="178"
-                  stroke="url(#progressGrad)" stroke-width="2.5"
-                  stroke-dasharray="840 1120"
-                  stroke-linecap="round"/>
-              </g>
-
-              <!-- DEFS: gradients + glow filters -->
-              <defs>
-                <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stop-color="#7c5cfc" stop-opacity="0"/>
-                  <stop offset="30%"  stop-color="#7c5cfc" stop-opacity="0.9"/>
-                  <stop offset="70%"  stop-color="#22d3ee" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
-                </linearGradient>
-                <filter id="glowPurple" x="-150%" y="-150%" width="400%" height="400%">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <filter id="glowCyan" x="-150%" y="-150%" width="400%" height="400%">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-            </svg>
-
-            <!-- ── Hologram shell: floating avatar ── -->
-            <div class="holo-shell" id="holoShell">
-              <img
-                src="./images/self.png"
-                alt="Soumyajeet Mondal — Full-Stack Developer"
-                class="avatar-3d"
-                id="avatar3d"
-                draggable="false"
-              />
+            <!-- ── Floating skill chips ── -->
+            <div class="pchip pchip-python">
+              <i class="fab fa-python"></i>
+              <span>Python</span>
+            </div>
+            <div class="pchip pchip-react">
+              <i class="fab fa-react"></i>
+              <span>React</span>
+            </div>
+            <div class="pchip pchip-js">
+              <i class="fab fa-js-square"></i>
+              <span>JavaScript</span>
             </div>
 
-            <!-- ── Scan beam ── -->
-            <div class="avatar-scan-beam" aria-hidden="true"></div>
-
-            <!-- ── Ground glow ── -->
-            <div class="avatar-ground-pool"></div>
-
-            <!-- ── Circular stat nodes ── -->
-            <div class="stat-node node-python">
-              <div class="stat-node-circle"><i class="fab fa-python"></i></div>
-              <span class="stat-node-label">Python</span>
-            </div>
-            <div class="stat-node node-react">
-              <div class="stat-node-circle"><i class="fab fa-react"></i></div>
-              <span class="stat-node-label">React</span>
-            </div>
-            <div class="stat-node node-js">
-              <div class="stat-node-circle"><i class="fab fa-js"></i></div>
-              <span class="stat-node-label">JS</span>
-            </div>
-
-            <!-- ── Ambient sparks ── -->
-            <div class="spark spark-1"></div>
-            <div class="spark spark-2"></div>
-            <div class="spark spark-3"></div>
-            <div class="spark spark-4"></div>
-
-            <!-- ── Bottom HUD bar ── -->
-            <div class="avatar-hud-data">
-              <span class="hud-line hud-accent">SJM · v2.6</span>
-              <div class="hud-divider"></div>
-              <span class="hud-line">Full-Stack Dev</span>
-              <div class="hud-divider"></div>
-              <span class="hud-line">KOL · IN</span>
+            <!-- ── Experience badge ── -->
+            <div class="portrait-exp-badge">
+              <div class="exp-number">2+</div>
+              <div class="exp-label">Years<br>Building</div>
             </div>
 
           </div>
