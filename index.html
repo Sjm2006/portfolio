@@ -136,7 +136,10 @@
           </span>
           SOUMYAJEET MONDAL<span></span>
         </a>
-        <div class="nav-links">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#journey">Journey</a>
@@ -329,7 +332,6 @@
         </div>
 
       </div>
-    </div>iv>
     </div>
   </section>
 
@@ -827,36 +829,22 @@
   <script src="script.js"></script>
   <!-- Three.js 3D background — runs after DOM ready -->
   <script src="threejs-bg.js"></script>
+
 <script>
-/* ── Holographic mouse tilt — smooth lerp ── */
-(function () {
-  const scene  = document.getElementById('photoContainer');
-  const shell  = document.getElementById('holoShell');
-  if (!scene || !shell || 'ontouchstart' in window) return;
-
-  let tX=0,tY=0,cX=0,cY=0, raf=null, inside=false;
-  const MAX=9, L=0.07;
-  const lerp=(a,b,t)=>a+(b-a)*t;
-
-  function tick() {
-    cX=lerp(cX,tX,L); cY=lerp(cY,tY,L);
-    shell.style.transform=`rotateY(${cX}deg) rotateX(${cY}deg)`;
-    if(!inside && Math.abs(cX)<0.04 && Math.abs(cY)<0.04){
-      shell.style.transform=''; raf=null; return;
-    }
-    raf=requestAnimationFrame(tick);
-  }
-
-  scene.addEventListener('mousemove',e=>{
-    const r=scene.getBoundingClientRect();
-    tX= ((e.clientX-r.left)/r.width  - 0.5)*MAX*2;
-    tY=-((e.clientY-r.top) /r.height - 0.5)*MAX;
-    if(!raf){inside=true; raf=requestAnimationFrame(tick);}
+/* Mobile nav */
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('navLinks');
+  if(!toggle || !nav) return;
+  toggle.addEventListener('click', function(){
+    nav.classList.toggle('nav-open');
+    toggle.classList.toggle('is-open');
   });
-  scene.addEventListener('mouseenter',()=>{ inside=true; });
-  scene.addEventListener('mouseleave',()=>{
-    inside=false; tX=0; tY=0;
-    if(!raf) raf=requestAnimationFrame(tick);
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('is-open');
+    });
   });
 })();
 </script>

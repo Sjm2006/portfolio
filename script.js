@@ -20,7 +20,7 @@ function initParticles() {
 function initTilt() {
   if ('ontouchstart' in window) return;
   
-  document.querySelectorAll('.project-card, .about-card, .tech-category').forEach(el => {
+  document.querySelectorAll('.about-card, .tech-category').forEach(el => {
     el.addEventListener('mousemove', e => {
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -107,7 +107,7 @@ function initHeroParallax() { /* no-op: initAvatarTilt handles this */ }
 function initOrbitRings() { /* no-op: orbit rings are pure CSS now */ }
 function initReveal() {
   const els = document.querySelectorAll(
-    '.about-card, .timeline-item, .tech-category, .project-card, .contact-item, .contact-form, .section-title'
+    '.about-card, .timeline-item, .skill-card, .project-card, .contact-item, .contact-form, .section-title, .timeline-body'
   );
 
   els.forEach((el, i) => {
