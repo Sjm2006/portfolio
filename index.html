@@ -327,212 +327,197 @@
     </div>
   </section>
 
-    <!-- Tech Stack Section -->
   <!-- ═══════════════════════════════════════════════════════════
-       SKILLS & TECHNOLOGY — Rebuilt
+       SKILLS & TECHNOLOGY — Premium Bento Redesign 2026
   ════════════════════════════════════════════════════════════ -->
-  <section id="tech-stack" class="tech-stack-section">
+  <section id="tech-stack" class="tech-stack-section skills-v2">
     <div class="container">
+
       <div class="section-title">
         <h2>SKILLS & TECHNOLOGY</h2>
-        <p>Tools I've actually used. Projects that prove it.</p>
+        <p>The engineering stack behind the work.</p>
       </div>
 
-      <!-- ── FEATURED BAR: languages I use every day ── -->
-      <div class="skills-featured-bar">
-        <span class="sfb-label">CORE LANGUAGES</span>
-        <div class="sfb-items">
-          <div class="sfb-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
-          <div class="sfb-item"><i class="fab fa-python"></i><span>Python</span></div>
-          <div class="sfb-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
-          <div class="sfb-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
-          <div class="sfb-item"><i class="fab fa-react"></i><span>React</span></div>
-          <div class="sfb-item sfb-item--dim"><i class="fas fa-copyright"></i><span>C / C++</span></div>
+      <!-- ── LANGUAGE MARQUEE ── -->
+      <div class="lang-marquee-wrap" aria-hidden="true">
+        <div class="lang-marquee-track">
+          <span class="lm-item"><i class="fab fa-js"></i> JavaScript</span>
+          <span class="lm-item"><i class="fab fa-python"></i> Python</span>
+          <span class="lm-item"><i class="fab fa-react"></i> React</span>
+          <span class="lm-item"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="lm-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="lm-dot">◆</span>
+          <span class="lm-item"><i class="fas fa-code"></i> TypeScript</span>
+          <span class="lm-item"><i class="fas fa-cube"></i> Rust</span>
+          <span class="lm-item"><i class="fas fa-copyright"></i> C / C++</span>
+          <span class="lm-item"><i class="fab fa-node-js"></i> Node.js</span>
+          <span class="lm-dot">◆</span>
+          <!-- duplicate for seamless loop -->
+          <span class="lm-item"><i class="fab fa-js"></i> JavaScript</span>
+          <span class="lm-item"><i class="fab fa-python"></i> Python</span>
+          <span class="lm-item"><i class="fab fa-react"></i> React</span>
+          <span class="lm-item"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="lm-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="lm-dot">◆</span>
+          <span class="lm-item"><i class="fas fa-code"></i> TypeScript</span>
+          <span class="lm-item"><i class="fas fa-cube"></i> Rust</span>
+          <span class="lm-item"><i class="fas fa-copyright"></i> C / C++</span>
+          <span class="lm-item"><i class="fab fa-node-js"></i> Node.js</span>
+          <span class="lm-dot">◆</span>
         </div>
       </div>
 
-      <!-- ── MAIN SKILL GRID ── -->
-      <div class="skills-grid">
+      <!-- ══════════════════════════════════════
+           BENTO GRID
+      ══════════════════════════════════════ -->
+      <div class="bento-grid">
 
-        <!-- 1. Frontend -->
-        <div class="skill-card" data-category="frontend">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #7c5cfc">
-              <i class="fas fa-display"></i>
-            </div>
-            <div>
-              <h4 class="skill-card__title">Frontend Development</h4>
+        <!-- ① FRONTEND — hero cell, spans 2 cols -->
+        <div class="bento-cell bento-cell--lg bento-cell--frontend" data-reveal>
+          <div class="bento-glow bento-glow--purple"></div>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-display"></i> Frontend</div>
+            <h3 class="bento-title">Interface<br>Engineering</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--bright">HTML5</span>
+              <span class="btag btag--bright">CSS3</span>
+              <span class="btag btag--bright">JavaScript ES6+</span>
+              <span class="btag btag--bright">React</span>
+              <span class="btag">TypeScript</span>
+              <span class="btag">Vite</span>
+              <span class="btag">Responsive UI</span>
+              <span class="btag">REST APIs</span>
+              <span class="btag">DOM Architecture</span>
+              <span class="btag">Bootstrap</span>
+              <span class="btag">Tailwind</span>
             </div>
           </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fab fa-html5"></i> HTML5</span>
-            <span class="pill pill--primary"><i class="fab fa-css3-alt"></i> CSS3</span>
-            <span class="pill pill--primary"><i class="fab fa-js"></i> JavaScript ES6+</span>
-            <span class="pill pill--primary"><i class="fab fa-react"></i> React</span>
-            <span class="pill pill--secondary"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
-            <span class="pill pill--secondary"><i class="fas fa-code-branch"></i> DOM Manipulation</span>
-            <span class="pill pill--secondary"><i class="fas fa-plug"></i> REST API Integration</span>
-            <span class="pill pill--secondary"><i class="fab fa-bootstrap"></i> Bootstrap / Tailwind</span>
+          <!-- Decorative mini code block -->
+          <div class="bento-code-deco" aria-hidden="true">
+            <span class="bcd-line"><span class="bcd-k">const</span> <span class="bcd-v">ui</span> = <span class="bcd-s">'pixel-perfect'</span>;</span>
+            <span class="bcd-line"><span class="bcd-k">import</span> React <span class="bcd-k">from</span> <span class="bcd-s">'react'</span>;</span>
           </div>
         </div>
 
-        <!-- 2. Backend -->
-        <div class="skill-card" data-category="backend">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #22d3ee">
-              <i class="fas fa-server"></i>
-            </div>
-            <div>
-              <h4 class="skill-card__title">Backend Development</h4>
-            </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fab fa-python"></i> Python (Flask)</span>
-            <span class="pill pill--primary"><i class="fas fa-exchange-alt"></i> REST API Design</span>
-            <span class="pill pill--secondary"><i class="fas fa-shield-alt"></i> Basic Auth</span>
-            <span class="pill pill--secondary"><i class="fas fa-database"></i> CRUD Operations</span>
-            <span class="pill pill--secondary"><i class="fas fa-file-code"></i> JSON Handling</span>
-          </div>
-        </div>
-
-        <!-- 3. Database & Storage -->
-        <div class="skill-card" data-category="database">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #a18dff">
-              <i class="fas fa-database"></i>
-            </div>
-            <div>
-              <h4 class="skill-card__title">Database & Storage</h4>
+        <!-- ② BLOCKCHAIN — accent cell -->
+        <div class="bento-cell bento-cell--blockchain" data-reveal>
+          <div class="bento-glow bento-glow--cyan"></div>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-link"></i> Web3</div>
+            <h3 class="bento-title">Blockchain<br>& dApps</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--cyan">Rust / Soroban</span>
+              <span class="btag btag--cyan">Smart Contracts</span>
+              <span class="btag">Stellar Network</span>
+              <span class="btag">Wallet Integration</span>
+              <span class="btag">On-Chain Logic</span>
             </div>
           </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fas fa-database"></i> MySQL</span>
-            <span class="pill pill--primary"><i class="fas fa-database"></i> SQLite</span>
-            <span class="pill pill--secondary"><i class="fas fa-hdd"></i> localStorage API</span>
-            <span class="pill pill--secondary"><i class="fab fa-google"></i> Google Sheets DB</span>
-            <span class="pill pill--secondary"><i class="fas fa-table"></i> Apps Script</span>
+          <div class="bento-chain-icon" aria-hidden="true">
+            <i class="fas fa-link"></i>
           </div>
         </div>
 
-        <!-- 4. Real-Time & Advanced -->
-        <div class="skill-card skill-card--accent" data-category="realtime">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #22d3ee">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <div>
-              <h4 class="skill-card__title">Real-Time Systems</h4>
-              <span class="skill-card__proof">Built: Canvas Collab (live multi-user drawing)</span>
+        <!-- ③ REAL-TIME — tall cell -->
+        <div class="bento-cell bento-cell--realtime" data-reveal>
+          <div class="bento-glow bento-glow--mixed"></div>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-bolt"></i> Real-Time</div>
+            <h3 class="bento-title">Live<br>Systems</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--bright">WebSockets</span>
+              <span class="btag">Canvas API</span>
+              <span class="btag">Event-Driven Logic</span>
+              <span class="btag">Multi-User Sync</span>
             </div>
           </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fas fa-wifi"></i> WebSockets</span>
-            <span class="pill pill--primary"><i class="fas fa-sync-alt"></i> Event-Driven Logic</span>
-            <span class="pill pill--secondary"><i class="fas fa-users"></i> Multi-User State Sync</span>
-            <span class="pill pill--secondary"><i class="fas fa-paint-brush"></i> Canvas API</span>
+          <div class="bento-pulse-ring" aria-hidden="true"></div>
+        </div>
+
+        <!-- ④ BACKEND -->
+        <div class="bento-cell bento-cell--backend" data-reveal>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-server"></i> Backend</div>
+            <h3 class="bento-title">Server-Side</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--bright">Python / Flask</span>
+              <span class="btag">REST API Design</span>
+              <span class="btag">CRUD</span>
+              <span class="btag">JSON Handling</span>
+              <span class="btag">Auth Flows</span>
+            </div>
           </div>
         </div>
 
-        <!-- 5. Blockchain & Web3 -->
-        <div class="skill-card skill-card--accent" data-category="blockchain">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #7c5cfc">
-              <i class="fas fa-link"></i>
+        <!-- ⑤ DATABASE -->
+        <div class="bento-cell bento-cell--db" data-reveal>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-database"></i> Data</div>
+            <h3 class="bento-title">Storage</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--bright">MySQL</span>
+              <span class="btag">SQLite</span>
+              <span class="btag">localStorage API</span>
+              <span class="btag">Google Sheets DB</span>
             </div>
-            <div>
-              <h4 class="skill-card__title">Blockchain & Web3</h4>
-              <span class="skill-card__proof">Built: Coinflip dApp on Stellar / Soroban</span>
-            </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fas fa-cube"></i> Smart Contracts</span>
-            <span class="pill pill--primary"><i class="fas fa-code"></i> Rust / Soroban</span>
-            <span class="pill pill--secondary"><i class="fas fa-wallet"></i> Wallet Integration</span>
-            <span class="pill pill--secondary"><i class="fas fa-network-wired"></i> dApp Development</span>
-            <span class="pill pill--secondary"><i class="fas fa-shield-alt"></i> Blockchain Basics</span>
           </div>
         </div>
 
-        <!-- 6. AI & Automation -->
-        <div class="skill-card" data-category="ai">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #67e8f9">
-              <i class="fas fa-brain"></i>
+        <!-- ⑥ TOOLS & WORKFLOW — wide -->
+        <div class="bento-cell bento-cell--tools bento-cell--tools-wide" data-reveal>
+          <div class="bento-glow bento-glow--purple bento-glow--soft"></div>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-tools"></i> Toolchain</div>
+            <h3 class="bento-title">Dev Environment</h3>
+            <div class="bento-tool-icons">
+              <div class="bti"><i class="fab fa-git-alt"></i><span>Git</span></div>
+              <div class="bti"><i class="fab fa-github"></i><span>GitHub</span></div>
+              <div class="bti"><i class="fas fa-vial"></i><span>Postman</span></div>
+              <div class="bti"><i class="fas fa-code"></i><span>VS Code</span></div>
+              <div class="bti"><i class="fas fa-terminal"></i><span>CLI</span></div>
+              <div class="bti"><i class="fas fa-bug"></i><span>DevTools</span></div>
+              <div class="bti"><i class="fab fa-github"></i><span>Gh Pages</span></div>
+              <div class="bti"><i class="fas fa-train"></i><span>Railway</span></div>
             </div>
-            <div>
-              <h4 class="skill-card__title">AI & Automation</h4>
-            </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fas fa-robot"></i> ChatGPT API</span>
-            <span class="pill pill--primary"><i class="fas fa-comments"></i> Prompt Engineering</span>
-            <span class="pill pill--secondary"><i class="fab fa-python"></i> Python Automation</span>
-            <span class="pill pill--secondary"><i class="fas fa-magic"></i> AI-Assisted Dev</span>
           </div>
         </div>
 
-        <!-- 7. Tools & Workflow -->
-        <div class="skill-card" data-category="tools">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #a18dff">
-              <i class="fas fa-tools"></i>
+        <!-- ⑦ AI & AUTOMATION -->
+        <div class="bento-cell bento-cell--ai" data-reveal>
+          <div class="bento-glow bento-glow--cyan bento-glow--soft"></div>
+          <div class="bento-inner">
+            <div class="bento-eyebrow"><i class="fas fa-brain"></i> AI</div>
+            <h3 class="bento-title">AI & Automation</h3>
+            <div class="bento-tag-cloud">
+              <span class="btag btag--cyan">ChatGPT API</span>
+              <span class="btag">Prompt Engineering</span>
+              <span class="btag">Python Automation</span>
+              <span class="btag">AI-Assisted Dev</span>
             </div>
-            <div>
-              <h4 class="skill-card__title">Tools & Workflow</h4>
-            </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fab fa-git-alt"></i> Git</span>
-            <span class="pill pill--primary"><i class="fab fa-github"></i> GitHub</span>
-            <span class="pill pill--secondary"><i class="fas fa-vial"></i> Postman</span>
-            <span class="pill pill--secondary"><i class="fas fa-bug"></i> Chrome DevTools</span>
-            <span class="pill pill--secondary"><i class="fas fa-code"></i> VS Code</span>
-            <span class="pill pill--secondary"><i class="fas fa-terminal"></i> CLI</span>
           </div>
         </div>
 
-        <!-- 8. Deployment -->
-        <div class="skill-card" data-category="deploy">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #22d3ee">
-              <i class="fas fa-rocket"></i>
+        <!-- ⑧ CS FOUNDATIONS — full-width banner -->
+        <div class="bento-cell bento-cell--cs bento-cell--full" data-reveal>
+          <div class="bento-inner bento-inner--row">
+            <div class="bento-cs-left">
+              <div class="bento-eyebrow"><i class="fas fa-graduation-cap"></i> Foundations</div>
+              <h3 class="bento-title bento-title--sm">Computer Science Core</h3>
+              <span class="bento-cs-sub">BCA · Techno India, Salt Lake</span>
             </div>
-            <div>
-              <h4 class="skill-card__title">Deployment & Hosting</h4>
-              <span class="skill-card__proof">Live apps: GitHub Pages · Railway</span>
+            <div class="bento-cs-tags">
+              <span class="btag btag--bright">OOP</span>
+              <span class="btag btag--bright">Data Structures & Algorithms</span>
+              <span class="btag btag--bright">DBMS</span>
+              <span class="btag">Operating Systems</span>
+              <span class="btag">Computer Networks</span>
+              <span class="btag">Software Engineering</span>
             </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fab fa-github"></i> GitHub Pages</span>
-            <span class="pill pill--primary"><i class="fas fa-train"></i> Railway</span>
-            <span class="pill pill--secondary"><i class="fas fa-cloud-upload-alt"></i> Static Deployment</span>
-            <span class="pill pill--secondary"><i class="fas fa-server"></i> Node / Python Hosting</span>
-          </div>
-        </div>
-
-        <!-- 9. CS Foundations — full-width -->
-        <div class="skill-card skill-card--wide" data-category="cs">
-          <div class="skill-card__header">
-            <div class="skill-card__icon-wrap" style="--card-hue: #7c5cfc">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div>
-              <h4 class="skill-card__title">Computer Science Foundations</h4>
-              <span class="skill-card__proof">BCA — Techno India, Salt Lake · Active coursework</span>
-            </div>
-          </div>
-          <div class="skill-pills">
-            <span class="pill pill--primary"><i class="fas fa-object-group"></i> OOP</span>
-            <span class="pill pill--primary"><i class="fas fa-project-diagram"></i> Data Structures & Algorithms</span>
-            <span class="pill pill--primary"><i class="fas fa-database"></i> DBMS</span>
-            <span class="pill pill--secondary"><i class="fas fa-desktop"></i> Operating Systems</span>
-            <span class="pill pill--secondary"><i class="fas fa-cogs"></i> Software Engineering</span>
-            <span class="pill pill--secondary"><i class="fas fa-network-wired"></i> Computer Networks</span>
           </div>
         </div>
 
       </div>
-      <!-- /skills-grid -->
+      <!-- /bento-grid -->
 
     </div>
   </section>
@@ -661,6 +646,47 @@
         </div>
       </div>
       
+      <!-- Project NEW: CoinFlip On-Chain — Stellar / Soroban dApp -->
+      <div class="project-card project-card--web3">
+        <div class="project-img project-img--placeholder">
+          <div class="proj-placeholder">
+            <div class="proj-placeholder__glow"></div>
+            <div class="proj-placeholder__grid" aria-hidden="true"></div>
+            <div class="proj-placeholder__icon">
+              <i class="fas fa-link"></i>
+            </div>
+            <div class="proj-placeholder__label">
+              <span class="proj-placeholder__chain">STELLAR · SOROBAN</span>
+              <span class="proj-placeholder__chain-sub">On-Chain · Testnet</span>
+            </div>
+            <!-- Animated chain dots -->
+            <div class="proj-chain-anim" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-web3-badge">
+            <span class="w3b-dot"></span> Web3 / Blockchain
+          </div>
+          <h3>COINFLIP ON-CHAIN</h3>
+          <p>A provably-fair on-chain coin flip dApp built with a Rust smart contract deployed to the Stellar Testnet via the Soroban platform. Players bet XLM, call the flip function, and win double their stake at 50/50 odds — all enforced by the contract, not a server. Integrated Freighter wallet for transaction signing and XLM token transfers directly through the Soroban SDK.</p>
+          <div class="project-tags">
+            <span class="tag tag--web3">Rust</span>
+            <span class="tag tag--web3">Soroban / Stellar</span>
+            <span class="tag">Smart Contracts</span>
+            <span class="tag">dApp</span>
+            <span class="tag">Freighter Wallet</span>
+            <span class="tag">Web3</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/Sjm2006/coinflip-onchain" class="btn btn-ghost-web3" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i> View Repository
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- Project 7: Coming Soon -->
       <div class="project-card">
         <div class="project-img">
