@@ -5030,6 +5030,525 @@ h1 span::after {
 
 
 /* ============================================================
+   PREMIUM ENGINEERING ECOSYSTEM — Skills v3 2026
+   Structured category containers with premium hierarchy
+   ============================================================ */
+
+/* ── Ecosystem wrapper ── */
+.eco-system {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 48px;
+}
+
+/* ── Row types ── */
+.eco-row {
+  display: grid;
+  gap: 20px;
+}
+.eco-row--full      { grid-template-columns: 1fr; }
+.eco-row--split-7-5 { grid-template-columns: 7fr 5fr; }
+.eco-row--thirds    { grid-template-columns: repeat(3, 1fr); }
+.eco-row--halves    { grid-template-columns: 1fr 1fr; }
+
+/* ── Base category container ── */
+.eco-cat {
+  position: relative;
+  /* Clearly distinct dark panel with enough contrast vs page bg */
+  background: linear-gradient(145deg, rgba(30,24,65,0.96) 0%, rgba(18,16,45,0.98) 100%);
+  border: 1px solid rgba(124,92,252,0.28);
+  border-radius: 20px;
+  padding: 30px 32px 28px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  overflow: hidden;
+  /* Elevated shadow so card floats above page */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 4px 32px rgba(0,0,0,0.60),
+    0 1px 3px rgba(0,0,0,0.50),
+    0 0 0 1px rgba(124,92,252,0.06);
+  transition:
+    transform 0.4s var(--ease-out-expo),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Animated gradient border on hover */
+.eco-cat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(124,92,252,0.55) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(34,211,238,0.40) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top-edge accent stripe — always visible, gives each card identity */
+.eco-cat::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(124,92,252,0.45) 30%,
+    rgba(124,92,252,0.45) 70%,
+    transparent 100%);
+  border-radius: 0 0 2px 2px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.eco-cat:hover::before { opacity: 1; }
+.eco-cat:hover {
+  transform: translateY(-6px);
+  border-color: rgba(124,92,252,0.30);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 32px 80px rgba(0,0,0,0.55),
+    0 8px 32px rgba(124,92,252,0.12),
+    0 0 0 1px rgba(124,92,252,0.08);
+}
+
+/* ── Cyan-variant cards ── */
+.eco-cat--blockchain::after,
+.eco-cat--database::after,
+.eco-cat--ai::after {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(34,211,238,0.40) 30%,
+    rgba(34,211,238,0.40) 70%,
+    transparent 100%);
+}
+.eco-cat--blockchain:hover,
+.eco-cat--database:hover,
+.eco-cat--ai:hover {
+  border-color: rgba(34,211,238,0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 32px 80px rgba(0,0,0,0.55),
+    0 8px 32px rgba(34,211,238,0.10),
+    0 0 0 1px rgba(34,211,238,0.07);
+}
+
+/* ── Gradient cards (realtime / cs) ── */
+.eco-cat--realtime::after,
+.eco-cat--cs::after {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(124,92,252,0.30) 20%,
+    rgba(34,211,238,0.30) 80%,
+    transparent 100%);
+}
+
+/* ── Glow orb ── */
+.eco-cat-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  top: -100px; right: -80px;
+  filter: blur(70px);
+}
+.eco-glow--purple { background: radial-gradient(ellipse, rgba(124,92,252,0.28) 0%, transparent 70%); }
+.eco-glow--cyan   { background: radial-gradient(ellipse, rgba(34,211,238,0.22) 0%, transparent 70%); }
+.eco-glow--mixed  { background: radial-gradient(ellipse, rgba(124,92,252,0.18) 0%, rgba(34,211,238,0.16) 55%, transparent 70%); }
+
+/* ── Header ── */
+.eco-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  /* Visible separator line */
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Accent line next to title ── */
+.eco-cat-accent-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(124,92,252,0.50) 0%,
+    rgba(124,92,252,0.12) 60%,
+    transparent 100%);
+  border-radius: 1px;
+}
+.eco-accent--cyan {
+  background: linear-gradient(90deg,
+    rgba(34,211,238,0.50) 0%,
+    rgba(34,211,238,0.12) 60%,
+    transparent 100%);
+}
+.eco-accent--gradient {
+  background: linear-gradient(90deg,
+    rgba(124,92,252,0.40) 0%,
+    rgba(34,211,238,0.40) 50%,
+    transparent 100%);
+}
+
+/* ── Icon ── */
+.eco-cat-icon {
+  width: 40px; height: 40px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+}
+.eco-cat:hover .eco-cat-icon { transform: scale(1.08); }
+
+.eco-icon--purple {
+  background: rgba(124,92,252,0.16);
+  border: 1px solid rgba(124,92,252,0.35);
+  color: var(--accent-soft);
+  box-shadow: 0 0 24px rgba(124,92,252,0.20), inset 0 1px 0 rgba(124,92,252,0.15);
+}
+.eco-icon--cyan {
+  background: rgba(34,211,238,0.12);
+  border: 1px solid rgba(34,211,238,0.32);
+  color: var(--cyan-soft);
+  box-shadow: 0 0 24px rgba(34,211,238,0.16), inset 0 1px 0 rgba(34,211,238,0.12);
+}
+.eco-icon--gradient {
+  background: linear-gradient(135deg, rgba(124,92,252,0.16), rgba(34,211,238,0.12));
+  border: 1px solid rgba(124,92,252,0.28);
+  color: var(--accent-bright);
+  box-shadow: 0 0 24px rgba(124,92,252,0.16);
+}
+
+/* ── Title group ── */
+.eco-cat-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.eco-cat-num {
+  font-family: 'Courier New', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.eco-cat-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ── Body ── */
+.eco-cat-body {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Pill row ── */
+.eco-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Pills: 3-tier hierarchy ── */
+.epill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 9px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  transition: all 0.25s var(--ease-out-expo);
+  cursor: default;
+  white-space: nowrap;
+  position: relative;
+}
+.epill i { font-size: 0.70rem; }
+
+/* HERO — strong purple, clearly primary tech */
+.epill--hero {
+  background: rgba(124,92,252,0.18);
+  border: 1px solid rgba(124,92,252,0.40);
+  color: #d4c6ff;
+  box-shadow: inset 0 1px 0 rgba(124,92,252,0.20);
+}
+.epill--hero:hover {
+  background: rgba(124,92,252,0.28);
+  border-color: rgba(124,92,252,0.65);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(124,92,252,0.28), inset 0 1px 0 rgba(255,255,255,0.10);
+  color: #e0d5ff;
+}
+
+/* HERO-CYAN — strong cyan, clearly primary tech */
+.epill--hero-cyan {
+  background: rgba(34,211,238,0.14);
+  border: 1px solid rgba(34,211,238,0.38);
+  color: #a0f0fc;
+  box-shadow: inset 0 1px 0 rgba(34,211,238,0.18);
+}
+.epill--hero-cyan:hover {
+  background: rgba(34,211,238,0.24);
+  border-color: rgba(34,211,238,0.60);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(34,211,238,0.22), inset 0 1px 0 rgba(255,255,255,0.08);
+  color: #c0f6ff;
+}
+
+/* MID — mid-level purple */
+.epill--mid {
+  background: rgba(124,92,252,0.09);
+  border: 1px solid rgba(124,92,252,0.22);
+  color: var(--accent-soft);
+}
+.epill--mid:hover {
+  background: rgba(124,92,252,0.18);
+  border-color: rgba(124,92,252,0.40);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(124,92,252,0.18);
+}
+
+/* MID-CYAN — mid-level cyan */
+.epill--mid-cyan {
+  background: rgba(34,211,238,0.08);
+  border: 1px solid rgba(34,211,238,0.22);
+  color: var(--cyan);
+}
+.epill--mid-cyan:hover {
+  background: rgba(34,211,238,0.16);
+  border-color: rgba(34,211,238,0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(34,211,238,0.15);
+}
+
+/* SOFT — supporting tech, clearly secondary */
+.epill--soft {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text-secondary);
+}
+.epill--soft:hover {
+  background: rgba(34,211,238,0.09);
+  border-color: rgba(34,211,238,0.26);
+  color: var(--cyan-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34,211,238,0.12);
+}
+
+/* ── Tool icon grid ── */
+.eco-tool-icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.etool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 18px;
+  min-width: 72px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 8px rgba(0,0,0,0.25);
+  transition: all 0.28s var(--ease-out-expo);
+  cursor: default;
+  position: relative;
+}
+.etool::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(124,92,252,0.18) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.etool:hover {
+  background: rgba(124,92,252,0.12);
+  border-color: rgba(124,92,252,0.36);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(124,92,252,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.etool:hover::after { opacity: 1; }
+.etool i {
+  font-size: 1.25rem;
+  color: var(--accent-soft);
+  transition: color 0.3s ease, transform 0.3s var(--ease-spring);
+  position: relative; z-index: 1;
+}
+.etool:hover i { color: var(--accent-bright); transform: scale(1.15); }
+.etool span {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+  transition: color 0.3s ease;
+}
+.etool:hover span { color: var(--text-secondary); }
+
+/* ── CS Foundations row layout ── */
+.eco-cat-inner--cs-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.eco-cs-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+.eco-cs-left > div { display: flex; flex-direction: column; gap: 3px; }
+.eco-cs-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+  display: block;
+  margin-top: 2px;
+}
+.eco-cs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+/* ── Code deco (frontend cell) ── */
+.eco-cat-code-deco {
+  position: absolute;
+  bottom: 22px;
+  right: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.22;
+  pointer-events: none;
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+.eco-cat:hover .eco-cat-code-deco { opacity: 0.40; }
+
+/* ── Languages row — prominent banner ── */
+.eco-cat--languages {
+  background: linear-gradient(145deg, rgba(124,92,252,0.16) 0%, rgba(22,18,52,0.98) 60%);
+  border-color: rgba(124,92,252,0.40);
+}
+.eco-cat--languages:hover {
+  border-color: rgba(124,92,252,0.60);
+}
+
+/* ── Blockchain accent ── */
+.eco-cat--blockchain {
+  background: linear-gradient(145deg, rgba(34,211,238,0.13) 0%, rgba(14,20,40,0.98) 60%);
+  border-color: rgba(34,211,238,0.35);
+}
+.eco-cat--blockchain:hover {
+  border-color: rgba(34,211,238,0.55);
+}
+
+/* ── CS Foundations banner ── */
+.eco-cat--cs {
+  background: linear-gradient(135deg,
+    rgba(124,92,252,0.14) 0%,
+    rgba(20,18,48,0.98) 50%,
+    rgba(34,211,238,0.10) 100%);
+  border-color: rgba(124,92,252,0.35);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 1100px) {
+  .eco-row--split-7-5 { grid-template-columns: 1fr 1fr; }
+  .eco-row--thirds    { grid-template-columns: 1fr 1fr; }
+  .eco-cat--realtime  { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .eco-row--split-7-5,
+  .eco-row--thirds,
+  .eco-row--halves    { grid-template-columns: 1fr; }
+  .eco-cat            { padding: 22px 20px; }
+  .eco-cat-inner--cs-row { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .eco-cs-left        { min-width: unset; width: 100%; }
+  .eco-cat-code-deco  { display: none; }
+  .eco-cat-name       { font-size: 0.92rem; }
+}
+
+
+/* ── Safety: eco-rows are always visible (reveal handled by JS adding .revealed) ── */
+.eco-system .eco-row[data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+.eco-system .eco-row[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Stronger cyan-side card borders for database and AI cards ── */
+.eco-cat--database {
+  background: linear-gradient(145deg, rgba(34,211,238,0.10) 0%, rgba(14,20,40,0.98) 60%);
+  border-color: rgba(34,211,238,0.30);
+}
+.eco-cat--backend {
+  background: linear-gradient(145deg, rgba(124,92,252,0.12) 0%, rgba(20,16,48,0.98) 60%);
+  border-color: rgba(124,92,252,0.32);
+}
+.eco-cat--realtime {
+  background: linear-gradient(145deg, rgba(124,92,252,0.09) 0%, rgba(34,211,238,0.06) 100%);
+  border-color: rgba(124,92,252,0.28);
+}
+.eco-cat--design {
+  background: linear-gradient(145deg, rgba(124,92,252,0.11) 0%, rgba(20,16,48,0.98) 60%);
+  border-color: rgba(124,92,252,0.28);
+}
+.eco-cat--ai {
+  background: linear-gradient(145deg, rgba(34,211,238,0.10) 0%, rgba(14,20,40,0.98) 60%);
+  border-color: rgba(34,211,238,0.28);
+}
+.eco-cat--tools {
+  background: linear-gradient(145deg, rgba(124,92,252,0.11) 0%, rgba(20,16,48,0.98) 60%);
+  border-color: rgba(124,92,252,0.30);
+}
+
+/* ============================================================
    PROJECT CARDS — Premium Unified System 2026
    ============================================================ */
 

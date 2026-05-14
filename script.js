@@ -107,7 +107,7 @@ function initHeroParallax() { /* no-op: initAvatarTilt handles this */ }
 function initOrbitRings() { /* no-op: orbit rings are pure CSS now */ }
 function initReveal() {
   const els = document.querySelectorAll(
-    '.about-card, .timeline-item, .skill-card, .project-card, .contact-item, .contact-form, .section-title, .timeline-body'
+    '.about-card, .timeline-item, .skill-card, .project-card, .contact-item, .contact-form, .section-title, .timeline-body, .eco-row'
   );
 
   els.forEach((el, i) => {
